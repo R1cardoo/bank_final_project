@@ -1,5 +1,4 @@
 package loginPortals;
-//注册界面类
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
 
