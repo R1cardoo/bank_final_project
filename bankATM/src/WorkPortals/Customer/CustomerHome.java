@@ -12,7 +12,7 @@ public class CustomerHome {
 
     public static JLabel username = new JLabel("currentUser.name");
 
-    public static JButton LogOutBtn = new JButton("LogOut");
+    public static JButton LogOutBtn = new JButton("Log Out");
 
     public static JButton createAccountBtn = new myButton("Create Account"); // Jcheckbox
 
