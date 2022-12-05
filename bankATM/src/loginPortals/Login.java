@@ -24,7 +24,7 @@ public class Login {
         frame.setVisible(true);
     }
 
-    public void initFrame() {
+    private void initFrame() {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         panel1.add(username);

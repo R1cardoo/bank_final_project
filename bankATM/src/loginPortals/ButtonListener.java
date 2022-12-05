@@ -1,4 +1,6 @@
 package loginPortals;
+import WorkPortals.Customer.CustomerHome;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -12,6 +14,10 @@ public class ButtonListener implements ActionListener{
             System.out.println("Login Button pressed");
             // TODO check here     if failed ????
             PWHelper.loginSuccessful();
+            Login.dismiss();
+            // TODO if (isManager()) new ManagerHome()
+            // TODO else new CustomerHome()
+            new CustomerHome();
 
         } else if (Register.COMMAND_REGISTER.equals(command)) { // press register button
             System.out.println("Register Button pressed");
