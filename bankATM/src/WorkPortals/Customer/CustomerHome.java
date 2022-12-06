@@ -12,6 +12,9 @@ public class CustomerHome {
     public static final String COMMAND_SHOW_MARKET = "ShowMarket";
     public static final String COMMAND_VIEW_TRANSACTIONS = "ViewTransactions";
 
+    private JPanel contentPane;
+    CardLayout cardLayout=new CardLayout();
+
     // User currentUser;
     public static JFrame frame = new JFrame("Customer Home");
 

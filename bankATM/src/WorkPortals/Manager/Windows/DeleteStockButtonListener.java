@@ -7,9 +7,9 @@ public class DeleteStockButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        if (command.equals(DeleteStockFrame.COMMAND_SELECT_COMBOBOX)) {
+        if (command.equals(DeleteStockPanel.COMMAND_SELECT_COMBOBOX)) {
             // TODO only when a stock is selected, change Button to valid
-        } else if (command.equals(DeleteStockFrame.COMMAND_SUBMIT)) {
+        } else if (command.equals(DeleteStockPanel.COMMAND_SUBMIT)) {
             // TODO delete the stock
         }
 

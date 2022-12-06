@@ -1,8 +1,10 @@
 package WorkPortals.Manager;
 
-import WorkPortals.AccountInfoFrame;
+import WorkPortals.AccountInfoPanel;
+import WorkPortals.Customer.CustomerHome;
+import WorkPortals.Customer.Windows.CreateAccountPanel;
 import WorkPortals.Manager.Windows.*;
-import WorkPortals.StockMarketInfoFrame;
+import WorkPortals.StockMarketInfoPanel;
 import loginPortals.Login;
 
 import java.awt.event.ActionEvent;
@@ -14,36 +16,37 @@ public class ManagerButtonListener implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case ManagerHome.COMMAND_LOG_OUT:  // log out
-                // ManagerHome.dismiss();
+                ManagerHome.dismiss();
                 new Login();
                 break;
             case ManagerHome.COMMAND_GET_REPORT: // get daily report
                 // ManagerHome.dismiss();
-                new ViewDailyReportFrame("TODO the report");
+                ManagerHome.frame.setContentPane(new ViewDailyReportPanel("TODO the report"));
                 break;
             case ManagerHome.COMMAND_ADJUST_EXCHANGE_RATE: // adjust exchange rate
                 // ManagerHome.dismiss();
-                new AdjustExchangeRateFrame();
+                ManagerHome.frame.setContentPane(new AdjustExchangeRatePanel());
                 break;
             case ManagerHome.COMMAND_GET_CUSTOMER_INFO:  // get customer info
                 // ManagerHome.dismiss();
-                new AccountInfoFrame("TODO INFO");
+                ManagerHome.frame.setContentPane(new AccountInfoPanel(ManagerHome.frame,"TODO INFO"));
                 break;
             case ManagerHome.COMMAND_SHOW_STOCK_MARKET:    // show stock market info
                 // ManagerHome.dismiss();
-                new StockMarketInfoFrame("TODO stock info");
+                ManagerHome.frame.setContentPane(new StockMarketInfoPanel(ManagerHome.frame ,"TODO stock info"));
                 break;
             case ManagerHome.COMMAND_ADD_STOCK:     // add a stock to stock market
                 // ManagerHome.dismiss();
-                new AddStockFrame();
+
+                ManagerHome.frame.setContentPane(new AddStockPanel());
                 break;
             case ManagerHome.COMMAND_DELETE_STOCK:      // delete a stock from stock market
                 // ManagerHome.dismiss();
-                new DeleteStockFrame();
+                ManagerHome.frame.setContentPane(new DeleteStockPanel());
                 break;
             case ManagerHome.COMMAND_UPDATE_STOCK:      // update stock price
                 // ManagerHome.dismiss();
-                new UpdateStockFrame();
+                ManagerHome.frame.setContentPane(new UpdateStockPanel());
                 break;
             case ManagerHome.COMMAND_NEW_BUSINESS_DAY:     // get to a new day. pay interests
                 // TODO pay depositInterest and get loanInterest

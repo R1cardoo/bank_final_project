@@ -1,11 +1,11 @@
 package WorkPortals.Manager.Windows;
 
+import WorkPortals.Manager.ManagerHome;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class AddStockFrame {
-    public static JFrame frame = new JFrame("Add Stock");
-
+public class AddStockPanel extends JPanel{
     public static JLabel label1 = new JLabel("Name: ");
 
     public static JTextField name = new JTextField(10);
@@ -17,15 +17,13 @@ public class AddStockFrame {
     public static JTextField price = new JTextField(10);
     public static JButton submit = new JButton("Submit");
 
-    public AddStockFrame() {
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initFrame();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    public AddStockPanel() {
+        ManagerHome.frame.setTitle("Add Stock");
+        ManagerHome.frame.setSize(400, 300);
+        initPanel();
     }
 
-    private void initFrame() {
+    private void initPanel() {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         panel1.add(name);
@@ -48,12 +46,7 @@ public class AddStockFrame {
         vBox.add(panel3);
         vBox.add(panel4);
 
-        frame.setContentPane(vBox);
-    }
-
-    public static void dismiss() {
-        frame.setVisible(false);
-        frame.dispose();
+        add(vBox);
     }
 
 }

@@ -1,13 +1,11 @@
 package WorkPortals.Customer;
 
-import WorkPortals.AccountInfoFrame;
-import WorkPortals.Customer.Windows.CreateAccountFrame;
-import WorkPortals.Customer.Windows.MakeTransactionFrame;
-import WorkPortals.Customer.Windows.ViewTransactionFrame;
-import WorkPortals.StockMarketInfoFrame;
-import loginPortals.Register;
+import WorkPortals.AccountInfoPanel;
+import WorkPortals.Customer.Windows.CreateAccountPanel;
+import WorkPortals.Customer.Windows.MakeTransactionPanel;
+import WorkPortals.Customer.Windows.ViewTransactionPanel;
+import WorkPortals.StockMarketInfoPanel;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,19 +16,19 @@ public class CustomerButtonListener implements ActionListener {
         // TODO if (command == COMMMAND_XXXXXX)
         switch (command) {
             case CustomerHome.COMMAND_CREATE_ACCOUNT:
-                new CreateAccountFrame();
+                CustomerHome.frame.setContentPane(new CreateAccountPanel());
                 break;
             case CustomerHome.COMMAND_MAKE_TRANSACTION:
-                new MakeTransactionFrame();
+                CustomerHome.frame.setContentPane(new MakeTransactionPanel());
                 break;
             case CustomerHome.COMMAND_SHOW_ACCOUNT:
-                new AccountInfoFrame("TODO info");
+                CustomerHome.frame.setContentPane(new AccountInfoPanel(CustomerHome.frame, "TODO info"));
                 break;
             case CustomerHome.COMMAND_SHOW_MARKET:
-                new StockMarketInfoFrame("TODO StockMarketInfo");
+                CustomerHome.frame.setContentPane(new StockMarketInfoPanel(CustomerHome.frame,"TODO StockMarketInfo"));
                 break;
             case CustomerHome.COMMAND_VIEW_TRANSACTIONS:
-                new ViewTransactionFrame("TODO transactions");
+                CustomerHome.frame.setContentPane(new ViewTransactionPanel("TODO StockMarketInfo"));
                 break;
         }
     }

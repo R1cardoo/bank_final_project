@@ -1,31 +1,27 @@
 package WorkPortals.Customer.Windows;
 
 import WorkPortals.Customer.CustomerButtonListener;
+import WorkPortals.Customer.CustomerHome;
 import WorkPortals.MyButton;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CreateAccountFrame extends JDialog {
-
-    public static JFrame frame = new JFrame("Create Account Portal");
-
+public class CreateAccountPanel extends JPanel {
     public static JButton createCheckingAccountBtn = new MyButton("Create Checking Account");
 
     public static JButton createSavingAccountBtn = new MyButton("Create Saving Account");
 
     public static JButton createSecurityAccountBtn = new MyButton("Create Security Account");
-    public CreateAccountFrame() {
-        frame.setSize(300, 200);
+    public CreateAccountPanel() {
+        CustomerHome.frame.setTitle("Create Account");
+        CustomerHome.frame.setSize(400, 500);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initFrame();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        initPanel();
     }
 
-    private void initFrame() {
-        JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    private void initPanel() {
+        JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(createCheckingAccountBtn);
         createCheckingAccountBtn.addActionListener(new CreateAccountListener());
 
@@ -42,12 +38,7 @@ public class CreateAccountFrame extends JDialog {
         vBox.add(panel2);
         vBox.add(panel3);
 
-        frame.setContentPane(vBox);
-    }
-
-    public static void dismiss() {
-        frame.setVisible(false);
-        frame.dispose();
+        add(vBox);
     }
 
 }
