@@ -35,7 +35,7 @@ public class CurrencyHelper {
     //if our bank don't support a kind of currency anymore, call this func to delete it.
     public boolean delCurrency(String kind){
         if(!currencyConvert.containsKey(kind)){
-           return false;  //already existed
+           return false;  //currency does not exist
         }
         currencyConvert.remove(kind);
         return true;
