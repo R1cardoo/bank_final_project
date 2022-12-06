@@ -6,6 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CustomerHome {
+    public static final String COMMAND_CREATE_ACCOUNT = "CreateAccount";
+    public static final String COMMAND_MAKE_TRANSACTION = "MakeTransaction";
+    public static final String COMMAND_SHOW_ACCOUNT = "ShowAccount";
+    public static final String COMMAND_SHOW_MARKET = "ShowMarket";
+    public static final String COMMAND_VIEW_TRANSACTIONS = "ViewTransactions";
 
     // User currentUser;
     public static JFrame frame = new JFrame("Customer Home");
@@ -40,24 +45,29 @@ public class CustomerHome {
 
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel2.add(createAccountBtn);
+        createAccountBtn.setActionCommand(COMMAND_CREATE_ACCOUNT);
         createAccountBtn.addActionListener(new CustomerButtonListener());
+        panel2.add(createAccountBtn);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel3.add(makeTransactionBtn);
+        makeTransactionBtn.setActionCommand(COMMAND_MAKE_TRANSACTION);
         makeTransactionBtn.addActionListener(new CustomerButtonListener());
+        panel3.add(makeTransactionBtn);
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel4.add(showAccountBtn);
+        showAccountBtn.setActionCommand(COMMAND_SHOW_ACCOUNT);
         showAccountBtn.addActionListener(new CustomerButtonListener());
+        panel4.add(showAccountBtn);
 
         JPanel panel5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel5.add(showStockMarketBtn);
+        showStockMarketBtn.setActionCommand(COMMAND_SHOW_MARKET);
         showStockMarketBtn.addActionListener(new CustomerButtonListener());
+        panel5.add(showStockMarketBtn);
 
         JPanel panel6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel6.add(viewTransactionsBtn);
+        viewTransactionsBtn.setActionCommand(COMMAND_VIEW_TRANSACTIONS);
         viewTransactionsBtn.addActionListener(new CustomerButtonListener());
+        panel6.add(viewTransactionsBtn);
 
         Box vBox = Box.createVerticalBox();
         vBox.add(panel1);

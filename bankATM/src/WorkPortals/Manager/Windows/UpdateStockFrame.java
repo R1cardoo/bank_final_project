@@ -3,25 +3,24 @@ package WorkPortals.Manager.Windows;
 import javax.swing.*;
 import java.awt.*;
 
-public class AdjustExchangeRateFrame {
+public class UpdateStockFrame {
     public static final String COMMAND_SELECT_COMBOBOX = "SelectComboBox";
     public static final String COMMAND_SUBMIT = "Submit";
 
-    public static JFrame frame = new JFrame("Adjust Exchange Rate");
+    public static JFrame frame = new JFrame("Update Stock");
 
-    public String[] currencies = {"Pound", "RMB", "Rupee"};
+    public static JLabel label1 = new JLabel("Stock: ");
 
-    public static JLabel label1 = new JLabel("currency: ");
+    public static JComboBox<String> comboBox = new JComboBox<>(); // select a Stock
 
-    public static JComboBox<String> comboBox = new JComboBox<>(); // select a currency
+    public static JLabel label2 = new JLabel("Price: ");
 
-    public static JLabel label2 = new JLabel("Worth (USD)");
-    public static JTextField worth = new JTextField(10);
+    public static JTextField price = new JTextField(10);
 
     public static JButton submit = new JButton("Submit");
 
-    public AdjustExchangeRateFrame() {
-        frame.setSize(600, 800);
+    public UpdateStockFrame() {
+        frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initFrame();
         frame.setLocationRelativeTo(null);
@@ -31,21 +30,19 @@ public class AdjustExchangeRateFrame {
     private void initFrame() {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
-        for (String cur : currencies) {
-            comboBox.addItem(cur);
-        }
-        comboBox.setActionCommand(COMMAND_SELECT_COMBOBOX);
-        comboBox.addActionListener(new AdjustExchangeRateButtonListener());
+        // TODO add elements
         panel1.add(comboBox);
+        comboBox.setActionCommand(COMMAND_SELECT_COMBOBOX);
+        comboBox.addActionListener(new UpdateStockButtonListener());
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel2.add(label2);
-        panel2.add(worth);
+        panel1.add(label2);
+        panel2.add(price);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(submit);
         submit.setActionCommand(COMMAND_SUBMIT);
-        submit.addActionListener(new AdjustExchangeRateButtonListener());
+        submit.addActionListener(new UpdateStockButtonListener());
 
         Box vBox = Box.createVerticalBox();
         vBox.add(panel1);

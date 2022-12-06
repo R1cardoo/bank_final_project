@@ -6,6 +6,6 @@ import java.awt.event.ActionListener;
 public class CreateAccountListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String command = e.getActionCommand();
     }
 }

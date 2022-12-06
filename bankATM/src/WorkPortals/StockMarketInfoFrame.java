@@ -1,4 +1,4 @@
-package WorkPortals.Customer.Windows;
+package WorkPortals;
 
 import javax.swing.*;
 import java.awt.*;

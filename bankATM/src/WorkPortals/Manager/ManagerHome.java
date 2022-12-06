@@ -6,11 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ManagerHome {
+    public static final String COMMAND_LOG_OUT = "LogOut";
+    public static final String COMMAND_GET_REPORT = "GetDailyReport";
+    public static final String COMMAND_GET_CUSTOMER_INFO = "GetCustomerInfo";
+    public static final String COMMAND_ADJUST_EXCHANGE_RATE = "AdjustExchangeRate";
+    public static final String COMMAND_SHOW_STOCK_MARKET = "ShowStockMarket";
+    public static final String COMMAND_ADD_STOCK = "AddStock";
+    public static final String COMMAND_DELETE_STOCK = "DeleteStock";
+    public static final String COMMAND_UPDATE_STOCK = "UpdateStock";
+    public static final String COMMAND_NEW_BUSINESS_DAY = "NewBusinessDay";
+
     public static JFrame frame = new JFrame("Manager Home");
 
     public static JLabel username = new JLabel("Manager");
 
-    public static JButton LogOutBtn = new JButton("LogOut");
+    public static JButton logOutBtn = new JButton("LogOut");
 
     public static JButton getReportBtn = new MyButton("Get Daily Report");
 
@@ -40,37 +50,45 @@ public class ManagerHome {
     private void initFrame() {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel1.add(username);
-        panel1.add(LogOutBtn);
+        panel1.add(logOutBtn);
+        logOutBtn.setActionCommand(COMMAND_LOG_OUT);
+        logOutBtn.addActionListener(new ManagerButtonListener());
 
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel2.add(getReportBtn);
+        getReportBtn.setActionCommand(COMMAND_GET_REPORT);
         getReportBtn.addActionListener(new ManagerButtonListener());
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(getCustomerInfo);
+        getCustomerInfo.setActionCommand(COMMAND_GET_CUSTOMER_INFO);
         getCustomerInfo.addActionListener(new ManagerButtonListener());
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel4.add(adjustExchangeRate);
+        adjustExchangeRate.setActionCommand(COMMAND_ADJUST_EXCHANGE_RATE);
         adjustExchangeRate.addActionListener(new ManagerButtonListener());
 
         JPanel panel5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel5.add(showStockMarketBtn);
+        showStockMarketBtn.setActionCommand(COMMAND_SHOW_STOCK_MARKET);
         showStockMarketBtn.addActionListener(new ManagerButtonListener());
-
-
 
         JPanel panel6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel6.add(addStockBtn);
         panel6.add(deleteStockBtn);
         panel6.add(updateStockBtn);
+        addStockBtn.setActionCommand(COMMAND_ADD_STOCK);
         addStockBtn.addActionListener(new ManagerButtonListener());
+        deleteStockBtn.setActionCommand(COMMAND_DELETE_STOCK);
         deleteStockBtn.addActionListener(new ManagerButtonListener());
+        updateStockBtn.setActionCommand(COMMAND_UPDATE_STOCK);
         updateStockBtn.addActionListener(new ManagerButtonListener());
 
         JPanel panel7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel7.add(newBusinessDayBtn);
+        newBusinessDayBtn.setActionCommand(COMMAND_NEW_BUSINESS_DAY);
         newBusinessDayBtn.addActionListener(new ManagerButtonListener());
 
         Box vBox = Box.createVerticalBox();
