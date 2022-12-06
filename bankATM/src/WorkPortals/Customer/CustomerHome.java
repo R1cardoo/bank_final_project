@@ -1,6 +1,6 @@
 package WorkPortals.Customer;
 
-import WorkPortals.myButton;
+import WorkPortals.MyButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +12,17 @@ public class CustomerHome {
 
     public static JLabel username = new JLabel("currentUser.name");
 
-    public static JButton LogOutBtn = new JButton("LogOut");
+    public static JButton LogOutBtn = new JButton("Log Out");
 
-    public static JButton createAccountBtn = new myButton("Create Account"); // Jcheckbox
+    public static JButton createAccountBtn = new MyButton("Create Account"); // Jcheckbox
 
-    public static JButton makeTransactionBtn = new myButton("Make a Transaction"); // select a account, then action, then amount
+    public static JButton makeTransactionBtn = new MyButton("Make a Transaction"); // select a account, then action, then amount
 
-    public static JButton showAccountBtn = new myButton("Show Account Info");
+    public static JButton showAccountBtn = new MyButton("Show Account Info");
 
-    public static JButton showStockMarketBtn = new myButton("Show Stock Market Info");
+    public static JButton showStockMarketBtn = new MyButton("Show Stock Market Info");
 
-    public static JButton viewTransactionsBtn = new myButton("View transactions");
+    public static JButton viewTransactionsBtn = new MyButton("View transactions");
 
     public CustomerHome() { // 传入一个user
         frame.setSize(800, 600);

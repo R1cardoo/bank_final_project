@@ -1,26 +1,24 @@
-package WorkPortals.Customer.Windows;
-
-import WorkPortals.Customer.CustomerButtonListener;
+package WorkPortals.Manager.Windows;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class viewTransactionFrame {
-    public static JFrame frame = new JFrame("Create Account Portal");
+public class ViewDailyReportFrame {
+    public static JFrame frame = new JFrame("View Daily Report");
 
     public static JLabel label = new JLabel("null");
 
-    public viewTransactionFrame(String transactionString) {
+    public ViewDailyReportFrame(String dailyReport) {
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initFrame(transactionString);
+        initFrame(dailyReport);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private void initFrame(String transactionString) {
+    private void initFrame(String dailyReport) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        label.setText(transactionString);
+        label.setText(dailyReport);
         panel.add(label);
 
         Box vBox = Box.createVerticalBox();
@@ -33,5 +31,4 @@ public class viewTransactionFrame {
         frame.setVisible(false);
         frame.dispose();
     }
-
 }

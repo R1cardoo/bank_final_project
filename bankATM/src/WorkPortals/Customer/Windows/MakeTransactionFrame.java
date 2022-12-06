@@ -3,12 +3,12 @@ package WorkPortals.Customer.Windows;
 import javax.swing.*;
 import java.awt.*;
 
-public class makeTransactionFrame {
+public class MakeTransactionFrame {
     public static final String CHECKING = "checkingAccount";
     public static final String SAVING = "savingAccount";
     public static final String SECURITY = "securityAccount";
 
-    public static JFrame frame = new JFrame();
+    public static JFrame frame = new JFrame("make a transaction");
     public static JLabel label1 = new JLabel("Account");
     public static JComboBox<String> comboBox1 = new JComboBox<>(); // account
 
@@ -20,7 +20,7 @@ public class makeTransactionFrame {
 
     public static JButton submitBtn = new JButton("Submit");
 
-    public makeTransactionFrame() { // TODO input user
+    public MakeTransactionFrame() { // TODO input user
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initFrame();
@@ -31,7 +31,7 @@ public class makeTransactionFrame {
     private void initFrame() { // TODO input user
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
-        comboBox1.addActionListener(new makeTransactionListener());
+        comboBox1.addActionListener(new MakeTransactionListener());
         panel1.add(comboBox1);
 
 
@@ -44,7 +44,7 @@ public class makeTransactionFrame {
         panel3.add(amount);
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        submitBtn.addActionListener(new makeTransactionListener());
+        submitBtn.addActionListener(new MakeTransactionListener());
         panel4.add(submitBtn);
 
 

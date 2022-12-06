@@ -1,21 +1,21 @@
 package WorkPortals.Customer.Windows;
 
 import WorkPortals.Customer.CustomerButtonListener;
-import WorkPortals.myButton;
+import WorkPortals.MyButton;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class createAccountFrame extends JDialog {
+public class CreateAccountFrame extends JDialog {
 
     public static JFrame frame = new JFrame("Create Account Portal");
 
-    public static JButton createCheckingAccountBtn = new myButton("Create Checking Account");
+    public static JButton createCheckingAccountBtn = new MyButton("Create Checking Account");
 
-    public static JButton createSavingAccountBtn = new myButton("Create Saving Account");
+    public static JButton createSavingAccountBtn = new MyButton("Create Saving Account");
 
-    public static JButton createSecurityAccountBtn = new myButton("Create Security Account");
-    public createAccountFrame() {
+    public static JButton createSecurityAccountBtn = new MyButton("Create Security Account");
+    public CreateAccountFrame() {
         frame.setSize(300, 200);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +27,7 @@ public class createAccountFrame extends JDialog {
     private void initFrame() {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel1.add(createCheckingAccountBtn);
-        createCheckingAccountBtn.addActionListener(new createAccountListener());
+        createCheckingAccountBtn.addActionListener(new CreateAccountListener());
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel2.add(createSavingAccountBtn);
