@@ -11,7 +11,7 @@ public class Customer extends User{
     /**
      *  SavingsAccount
      */
-    private String SaveAccount;
+    private String saveAccount;
 
     /**
      * CheckAccount
@@ -19,7 +19,7 @@ public class Customer extends User{
     private String checkAccount;
 
 
-    private final ArrayList<Transaction> transactionArrayList  = new ArrayList<>();
+    private ArrayList<Transaction> transactionArrayList  = new ArrayList<>();
 
 
 
@@ -28,11 +28,13 @@ public class Customer extends User{
     }
 
 
-    public Customer(String userName, String passWord, String id, boolean isLogin, double balance, String saveAccount, String checkAccount) {
+    public Customer(String userName, String passWord, String id, boolean isLogin, double balance, String saveAccount, String checkAccount,
+                    ArrayList<Transaction> transactionArrayList) {
         super(userName, passWord, id, isLogin);
         this.balance = balance;
-        SaveAccount = saveAccount;
+        this.saveAccount = saveAccount;
         this.checkAccount = checkAccount;
+        this.transactionArrayList=transactionArrayList;
     }
 
     public double getBalance() {
@@ -44,11 +46,11 @@ public class Customer extends User{
     }
 
     public String getSaveAccount() {
-        return SaveAccount;
+        return saveAccount;
     }
 
     public void setSaveAccount(String saveAccount) {
-        SaveAccount = saveAccount;
+        this.saveAccount = saveAccount;
     }
 
     public String getCheckAccount() {
@@ -67,7 +69,7 @@ public class Customer extends User{
     public String toString() {
         final StringBuffer sb = new StringBuffer("Customer{");
         sb.append("balance=").append(balance);
-        sb.append(", SaveAccount='").append(SaveAccount).append('\'');
+        sb.append(", saveAccount='").append(saveAccount).append('\'');
         sb.append(", checkAccount='").append(checkAccount).append('\'');
         sb.append(", transactionArrayList=").append(transactionArrayList);
         sb.append('}');
