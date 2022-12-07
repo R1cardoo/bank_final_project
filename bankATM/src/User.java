@@ -6,17 +6,21 @@ public class User implements Serializable {
     private String id;
     private boolean isLogin = false;
 
-    public User(String userName, String passWord) {
-        this.userName = userName;
-        this.passWord = passWord;
-    }
-
-    public User() {
-    }
-
     public boolean login(String userName, String passWord){
         isLogin = userName.equals(this.userName) && passWord.equals(this.passWord);
         return isLogin;
+    }
+
+    public User(String userName, String passWord, String id, boolean isLogin) {
+        this.userName = userName;
+        this.passWord = passWord;
+        this.id = id;
+        this.isLogin = isLogin;
+    }
+
+    public User(String userName, String passWord) {
+        this.userName = userName;
+        this.passWord = passWord;
     }
 
     public boolean logout(){
