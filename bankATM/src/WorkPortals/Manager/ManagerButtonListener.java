@@ -15,10 +15,6 @@ public class ManagerButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
-            case ManagerHome.COMMAND_LOG_OUT:  // log out
-                ManagerHome.dismiss();
-                new Login();
-                break;
             case ManagerHome.COMMAND_GET_REPORT: // get daily report
                 // ManagerHome.dismiss();
                 ManagerHome.frame.setContentPane(new ViewDailyReportPanel("TODO the report"));
@@ -29,11 +25,11 @@ public class ManagerButtonListener implements ActionListener {
                 break;
             case ManagerHome.COMMAND_GET_CUSTOMER_INFO:  // get customer info
                 // ManagerHome.dismiss();
-                ManagerHome.frame.setContentPane(new AccountInfoPanel(ManagerHome.frame,"TODO INFO"));
+                ManagerHome.frame.setContentPane(new AccountInfoPanel(ManagerHome.frame,ManagerHome.basePane, "TODO INFO"));
                 break;
             case ManagerHome.COMMAND_SHOW_STOCK_MARKET:    // show stock market info
                 // ManagerHome.dismiss();
-                ManagerHome.frame.setContentPane(new StockMarketInfoPanel(ManagerHome.frame ,"TODO stock info"));
+                ManagerHome.frame.setContentPane(new StockMarketInfoPanel(ManagerHome.frame, ManagerHome.basePane,"TODO stock info"));
                 break;
             case ManagerHome.COMMAND_ADD_STOCK:     // add a stock to stock market
                 // ManagerHome.dismiss();

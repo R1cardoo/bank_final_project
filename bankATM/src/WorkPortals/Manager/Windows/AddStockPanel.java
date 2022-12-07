@@ -1,11 +1,14 @@
 package WorkPortals.Manager.Windows;
 
 import WorkPortals.Manager.ManagerHome;
+import WorkPortals.BackButtonListener;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class AddStockPanel extends JPanel{
+    public static JButton backBtn = new JButton("back");
+
     public static JLabel label1 = new JLabel("Name: ");
 
     public static JTextField name = new JTextField(10);
@@ -24,6 +27,10 @@ public class AddStockPanel extends JPanel{
     }
 
     private void initPanel() {
+        JPanel panel0 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panel0.add(backBtn);
+        backBtn.addActionListener(new BackButtonListener(ManagerHome.frame, ManagerHome.basePane));
+
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         panel1.add(name);
@@ -41,6 +48,7 @@ public class AddStockPanel extends JPanel{
         submit.addActionListener(new AddStockButtonListener());
 
         Box vBox = Box.createVerticalBox();
+        vBox.add(panel0);
         vBox.add(panel1);
         vBox.add(panel2);
         vBox.add(panel3);

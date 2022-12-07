@@ -1,5 +1,6 @@
 package WorkPortals.Customer;
 
+import WorkPortals.LogOutButtonListener;
 import WorkPortals.MyButton;
 
 import javax.swing.*;
@@ -12,15 +13,12 @@ public class CustomerHome {
     public static final String COMMAND_SHOW_MARKET = "ShowMarket";
     public static final String COMMAND_VIEW_TRANSACTIONS = "ViewTransactions";
 
-    private JPanel contentPane;
-    CardLayout cardLayout=new CardLayout();
-
     // User currentUser;
     public static JFrame frame = new JFrame("Customer Home");
 
     public static JLabel username = new JLabel("currentUser.name");
 
-    public static JButton LogOutBtn = new JButton("Log Out");
+    public static JButton logOutBtn = new JButton("Log Out");
 
     public static JButton createAccountBtn = new MyButton("Create Account"); // Jcheckbox
 
@@ -31,6 +29,8 @@ public class CustomerHome {
     public static JButton showStockMarketBtn = new MyButton("Show Stock Market Info");
 
     public static JButton viewTransactionsBtn = new MyButton("View transactions");
+
+    public static Box basePane;
 
     public CustomerHome() { // 传入一个user
         frame.setSize(800, 600);
@@ -44,8 +44,8 @@ public class CustomerHome {
     private void initFrame() {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel1.add(username);
-        panel1.add(LogOutBtn);
-
+        panel1.add(logOutBtn);
+        logOutBtn.addActionListener(new LogOutButtonListener(frame));
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         createAccountBtn.setActionCommand(COMMAND_CREATE_ACCOUNT);
@@ -72,15 +72,15 @@ public class CustomerHome {
         viewTransactionsBtn.addActionListener(new CustomerButtonListener());
         panel6.add(viewTransactionsBtn);
 
-        Box vBox = Box.createVerticalBox();
-        vBox.add(panel1);
-        vBox.add(panel2);
-        vBox.add(panel3);
-        vBox.add(panel4);
-        vBox.add(panel5);
-        vBox.add(panel6);
+        basePane = Box.createVerticalBox();
+        basePane.add(panel1);
+        basePane.add(panel2);
+        basePane.add(panel3);
+        basePane.add(panel4);
+        basePane.add(panel5);
+        basePane.add(panel6);
 
-        frame.setContentPane(vBox);
+        frame.setContentPane(basePane);
     }
 
     public static void dismiss() {

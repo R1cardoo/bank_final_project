@@ -1,6 +1,7 @@
 package WorkPortals.Manager.Windows;
 
 import WorkPortals.Manager.ManagerHome;
+import WorkPortals.BackButtonListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +9,8 @@ import java.awt.*;
 public class AdjustExchangeRatePanel extends JPanel{
     public static final String COMMAND_SELECT_COMBOBOX = "SelectComboBox";
     public static final String COMMAND_SUBMIT = "Submit";
+
+    public static JButton backBtn = new JButton("back");
 
     public String[] currencies = {"Pound", "RMB", "Rupee"};
 
@@ -27,6 +30,10 @@ public class AdjustExchangeRatePanel extends JPanel{
     }
 
     private void initPanel() {
+        JPanel panel0 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panel0.add(backBtn);
+        backBtn.addActionListener(new BackButtonListener(ManagerHome.frame, ManagerHome.basePane));
+
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         for (String cur : currencies) {
@@ -46,6 +53,7 @@ public class AdjustExchangeRatePanel extends JPanel{
         submit.addActionListener(new AdjustExchangeRateButtonListener());
 
         Box vBox = Box.createVerticalBox();
+        vBox.add(panel0);
         vBox.add(panel1);
         vBox.add(panel2);
         vBox.add(panel3);

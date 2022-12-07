@@ -1,6 +1,7 @@
 package WorkPortals.Customer.Windows;
 
 import WorkPortals.Customer.CustomerHome;
+import WorkPortals.BackButtonListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,8 @@ public class MakeTransactionPanel extends JPanel{
     public static final String CHECKING = "checkingAccount";
     public static final String SAVING = "savingAccount";
     public static final String SECURITY = "securityAccount";
+
+    public static JButton backBtn = new JButton("back");
     public static JLabel label1 = new JLabel("Account");
     public static JComboBox<String> comboBox1 = new JComboBox<>(); // account
 
@@ -28,6 +31,10 @@ public class MakeTransactionPanel extends JPanel{
     }
 
     private void initPanel() { // TODO input user
+        JPanel panel0 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panel0.add(backBtn);
+        backBtn.addActionListener(new BackButtonListener(CustomerHome.frame, CustomerHome.basePane));
+
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         comboBox1.addActionListener(new MakeTransactionListener());
@@ -48,6 +55,7 @@ public class MakeTransactionPanel extends JPanel{
 
 
         Box vBox = Box.createVerticalBox();
+        vBox.add(panel0);
         vBox.add(panel1);
         vBox.add(panel2);
         vBox.add(panel3);

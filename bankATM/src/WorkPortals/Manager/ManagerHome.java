@@ -1,5 +1,6 @@
 package WorkPortals.Manager;
 
+import WorkPortals.LogOutButtonListener;
 import WorkPortals.MyButton;
 
 import javax.swing.*;
@@ -38,6 +39,8 @@ public class ManagerHome {
 
     public static JButton newBusinessDayBtn = new MyButton("New Business Day"); //
 
+    public static Box basePane;
+
     public ManagerHome() { // 传入一个user
         frame.setSize(800, 600);
 
@@ -51,8 +54,7 @@ public class ManagerHome {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel1.add(username);
         panel1.add(logOutBtn);
-        logOutBtn.setActionCommand(COMMAND_LOG_OUT);
-        logOutBtn.addActionListener(new ManagerButtonListener());
+        logOutBtn.addActionListener(new LogOutButtonListener(frame));
 
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -91,16 +93,16 @@ public class ManagerHome {
         newBusinessDayBtn.setActionCommand(COMMAND_NEW_BUSINESS_DAY);
         newBusinessDayBtn.addActionListener(new ManagerButtonListener());
 
-        Box vBox = Box.createVerticalBox();
-        vBox.add(panel1);
-        vBox.add(panel2);
-        vBox.add(panel3);
-        vBox.add(panel4);
-        vBox.add(panel5);
-        vBox.add(panel6);
-        vBox.add(panel7);
+        basePane = Box.createVerticalBox();
+        basePane.add(panel1);
+        basePane.add(panel2);
+        basePane.add(panel3);
+        basePane.add(panel4);
+        basePane.add(panel5);
+        basePane.add(panel6);
+        basePane.add(panel7);
 
-        frame.setContentPane(vBox);
+        frame.setContentPane(basePane);
     }
 
     public static void dismiss() {
