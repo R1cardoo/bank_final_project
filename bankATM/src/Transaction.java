@@ -31,6 +31,19 @@ public class Transaction implements Serializable {
      */
     String transactionType;
 
+    public Transaction(String userName, String accountType, long date, double feeCharged, double amount, String currency, String transactionType) {
+        this.userName = userName;
+        this.accountType = accountType;
+        this.date = date;
+        this.feeCharged = feeCharged;
+        this.amount = amount;
+        this.currency = currency;
+        this.transactionType = transactionType;
+    }
+
+    public Transaction() {
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
