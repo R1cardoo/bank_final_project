@@ -1,11 +1,19 @@
 package WorkPortals.Customer;
 
-import WorkPortals.myButton;
+import WorkPortals.MyButton;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CustomerHome {
+    public static final String COMMAND_CREATE_ACCOUNT = "CreateAccount";
+    public static final String COMMAND_MAKE_TRANSACTION = "MakeTransaction";
+    public static final String COMMAND_SHOW_ACCOUNT = "ShowAccount";
+    public static final String COMMAND_SHOW_MARKET = "ShowMarket";
+    public static final String COMMAND_VIEW_TRANSACTIONS = "ViewTransactions";
+
+    private JPanel contentPane;
+    CardLayout cardLayout=new CardLayout();
 
     // User currentUser;
     public static JFrame frame = new JFrame("Customer Home");
@@ -14,15 +22,15 @@ public class CustomerHome {
 
     public static JButton LogOutBtn = new JButton("Log Out");
 
-    public static JButton createAccountBtn = new myButton("Create Account"); // Jcheckbox
+    public static JButton createAccountBtn = new MyButton("Create Account"); // Jcheckbox
 
-    public static JButton makeTransactionBtn = new myButton("Make a Transaction"); // select a account, then action, then amount
+    public static JButton makeTransactionBtn = new MyButton("Make a Transaction"); // select a account, then action, then amount
 
-    public static JButton showAccountBtn = new myButton("Show Account Info");
+    public static JButton showAccountBtn = new MyButton("Show Account Info");
 
-    public static JButton showStockMarketBtn = new myButton("Show Stock Market Info");
+    public static JButton showStockMarketBtn = new MyButton("Show Stock Market Info");
 
-    public static JButton viewTransactionsBtn = new myButton("View transactions");
+    public static JButton viewTransactionsBtn = new MyButton("View transactions");
 
     public CustomerHome() { // 传入一个user
         frame.setSize(800, 600);
@@ -40,24 +48,29 @@ public class CustomerHome {
 
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel2.add(createAccountBtn);
+        createAccountBtn.setActionCommand(COMMAND_CREATE_ACCOUNT);
         createAccountBtn.addActionListener(new CustomerButtonListener());
+        panel2.add(createAccountBtn);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel3.add(makeTransactionBtn);
+        makeTransactionBtn.setActionCommand(COMMAND_MAKE_TRANSACTION);
         makeTransactionBtn.addActionListener(new CustomerButtonListener());
+        panel3.add(makeTransactionBtn);
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel4.add(showAccountBtn);
+        showAccountBtn.setActionCommand(COMMAND_SHOW_ACCOUNT);
         showAccountBtn.addActionListener(new CustomerButtonListener());
+        panel4.add(showAccountBtn);
 
         JPanel panel5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel5.add(showStockMarketBtn);
+        showStockMarketBtn.setActionCommand(COMMAND_SHOW_MARKET);
         showStockMarketBtn.addActionListener(new CustomerButtonListener());
+        panel5.add(showStockMarketBtn);
 
         JPanel panel6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel6.add(viewTransactionsBtn);
+        viewTransactionsBtn.setActionCommand(COMMAND_VIEW_TRANSACTIONS);
         viewTransactionsBtn.addActionListener(new CustomerButtonListener());
+        panel6.add(viewTransactionsBtn);
 
         Box vBox = Box.createVerticalBox();
         vBox.add(panel1);

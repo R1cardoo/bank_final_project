@@ -1,14 +1,14 @@
 package WorkPortals.Customer.Windows;
 
+import WorkPortals.Customer.CustomerHome;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class makeTransactionFrame {
+public class MakeTransactionPanel extends JPanel{
     public static final String CHECKING = "checkingAccount";
     public static final String SAVING = "savingAccount";
     public static final String SECURITY = "securityAccount";
-
-    public static JFrame frame = new JFrame();
     public static JLabel label1 = new JLabel("Account");
     public static JComboBox<String> comboBox1 = new JComboBox<>(); // account
 
@@ -20,18 +20,17 @@ public class makeTransactionFrame {
 
     public static JButton submitBtn = new JButton("Submit");
 
-    public makeTransactionFrame() { // TODO input user
-        frame.setSize(350, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initFrame();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    public MakeTransactionPanel() { // TODO input user
+        CustomerHome.frame.setTitle("Make Transaction");
+        CustomerHome.frame.setSize(350, 200);
+
+        initPanel();
     }
 
-    private void initFrame() { // TODO input user
+    private void initPanel() { // TODO input user
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
-        comboBox1.addActionListener(new makeTransactionListener());
+        comboBox1.addActionListener(new MakeTransactionListener());
         panel1.add(comboBox1);
 
 
@@ -44,7 +43,7 @@ public class makeTransactionFrame {
         panel3.add(amount);
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        submitBtn.addActionListener(new makeTransactionListener());
+        submitBtn.addActionListener(new MakeTransactionListener());
         panel4.add(submitBtn);
 
 
@@ -54,13 +53,6 @@ public class makeTransactionFrame {
         vBox.add(panel3);
         vBox.add(panel4);
 
-        frame.setContentPane(vBox);
+        add(vBox);
     }
-
-    public static void dismiss() {
-        frame.setVisible(false);
-        frame.dispose();
-    }
-
-
 }

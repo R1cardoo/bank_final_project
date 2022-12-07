@@ -1,12 +1,10 @@
 package WorkPortals.Customer;
 
-import WorkPortals.Customer.Windows.createAccountFrame;
-
-import javax.swing.*;
+import WorkPortals.Customer.Windows.CreateAccountPanel;
 
 public class CustomerWindowHelper {
     public static void createAccount() {
-        new createAccountFrame();
+        new CreateAccountPanel();
     }
 
 }
