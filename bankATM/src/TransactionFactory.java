@@ -1,19 +1,14 @@
-import java.sql.Timestamp;
-import java.util.Date;
-
 public class TransactionFactory {
 
 
-    public static Transaction createTransaction(Customer customer,double fee,String type){
+    public static Transaction createTransaction(Customer customer,double fee,long date, String transType){
         Transaction transaction = new Transaction();
-        transaction.setAccountId("accountId");
-        transaction.setAccountName("accountName");
+        transaction.setUserName("userName");
         transaction.setAccountType("accountType");
         transaction.setFeeCharged(fee);
         transaction.setAmount(customer.getBalance());
-        transaction.setDate(new Timestamp(System.currentTimeMillis()));
-
-        transaction.setType(type);
+        transaction.setDate(date);
+        transaction.setTransactionType(transType);
         return transaction;
     }
 }
