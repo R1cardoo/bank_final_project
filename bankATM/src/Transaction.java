@@ -33,7 +33,7 @@ public class Transaction implements Serializable {
     /**
      * type: withdraw，deposit，loan
      */
-    String type;
+    String transactionType;
 
     @Override
     public String toString() {
@@ -45,7 +45,7 @@ public class Transaction implements Serializable {
                 ", feeCharged=" + feeCharged +
                 ", amount=" + amount +
                 ", currency='" + currency + '\'' +
-                ", type='" + type + '\'' +
+                ", type='" + transactionType + '\'' +
                 '}';
     }
 
@@ -105,11 +105,11 @@ public class Transaction implements Serializable {
         this.currency = currency;
     }
 
-    public String getType() {
-        return type;
+    public String getTransactionType() {
+        return transactionType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 }
