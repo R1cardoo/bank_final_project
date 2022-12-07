@@ -45,7 +45,7 @@ public class Transaction implements Serializable {
                 ", feeCharged=" + feeCharged +
                 ", amount=" + amount +
                 ", currency='" + currency + '\'' +
-                ", type='" + transactionType + '\'' +
+                ", transactionType='" + transactionType + '\'' +
                 '}';
     }
 
