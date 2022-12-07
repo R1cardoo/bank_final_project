@@ -5,17 +5,13 @@ public class Transaction implements Serializable {
     /**
      * account name
      */
-    String accountName;
-    /**
-     * account id
-     */
-    String accountId;
+    String userName;
     /**
      * account type
      */
     String accountType;
 
-    Timestamp date;
+    long date;
     /**
      * fee charged
      */
@@ -38,8 +34,7 @@ public class Transaction implements Serializable {
     @Override
     public String toString() {
         return "Transaction{" +
-                "accountName='" + accountName + '\'' +
-                ", accountId='" + accountId + '\'' +
+                "userName='" + userName + '\'' +
                 ", accountType='" + accountType + '\'' +
                 ", date=" + date +
                 ", feeCharged=" + feeCharged +
@@ -49,21 +44,14 @@ public class Transaction implements Serializable {
                 '}';
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
 
     public String getAccountType() {
         return accountType;
@@ -73,11 +61,11 @@ public class Transaction implements Serializable {
         this.accountType = accountType;
     }
 
-    public Timestamp getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
