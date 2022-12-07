@@ -25,6 +25,7 @@ public class ButtonListener implements ActionListener{
                 PWHelper.registerSuccessful();
                 Register.dismiss();
                 // TODO if manager  else user
+                // new CustomerHome / new ManagerHome
             }
             else {
                 PWHelper.registerFailed();
