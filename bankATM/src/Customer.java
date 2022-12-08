@@ -27,6 +27,13 @@ public class Customer extends User{
         return transactionArrayList;
     }
 
+    public Customer(){
+        super();
+    }
+
+    public Customer(String userName,String password){
+        super(userName,password);
+    }
 
     public Customer(String userName, String passWord, String id, boolean isLogin, double balance, String saveAccount, String checkAccount,
                     ArrayList<Transaction> transactionArrayList) {
