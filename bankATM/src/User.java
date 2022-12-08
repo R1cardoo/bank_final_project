@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.util.List;
+import java.io.IOException;
 
 public class User implements Serializable {
     private String userName;
@@ -6,9 +8,15 @@ public class User implements Serializable {
     private String id;
     private boolean isLogin = false;
 
-    public boolean login(String userName, String passWord){
-        isLogin = userName.equals(this.userName) && passWord.equals(this.passWord);
-        return isLogin;
+    public static User login(String userName, String passWord) throws IOException{
+        Admin admin = new Admin();
+        List<Customer> customers = admin.loadAllCustomers();
+        for (Customer customer : customers) {
+            if (customer.getUserName().equals(userName) && customer.getPassWord().equals(passWord)) {
+                return new User(customer.getUserName(),customer.getPassWord(),customer.getId(),true);
+            }
+        }
+        return null;
     }
 
     public User(){
