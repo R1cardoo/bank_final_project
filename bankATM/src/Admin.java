@@ -57,11 +57,15 @@ public class Admin {
 
     public List<Transaction> getTransByDate(long date) {
         //Returns all transactions for the date input
+        //if date not exist, return null
         List<Transaction> dailyTransaction=new ArrayList<>();
         for (Transaction single: transactionsList) {
             if(single.getDate()==date){
                 dailyTransaction.add(single);
             }
+        }
+        if(dailyTransaction.size()==0){
+            return null;
         }
         return dailyTransaction;
 
@@ -69,11 +73,15 @@ public class Admin {
 
     public List<Transaction> getTransByName(String name){
         //Returns all transactions for the name input
+        //if name not exist, return null
         List<Transaction> nameTransaction=new ArrayList<>();
         for (Transaction single: transactionsList) {
             if(single.getUserName().equals(name)){
                 nameTransaction.add(single);
             }
+        }
+        if(nameTransaction.size()==0){
+            return null;
         }
         return nameTransaction;
     }
