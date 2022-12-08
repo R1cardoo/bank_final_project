@@ -68,6 +68,7 @@ public class Admin {
     }
 
     public List<Transaction> getTransByName(String name){
+        //Returns all transactions for the name input
         List<Transaction> nameTransaction=new ArrayList<>();
         for (Transaction single: transactionsList) {
             if(single.getUserName().equals(name)){
