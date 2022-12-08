@@ -67,6 +67,16 @@ public class Admin {
 
     }
 
+    public List<Transaction> getTransByName(String name){
+        List<Transaction> nameTransaction=new ArrayList<>();
+        for (Transaction single: transactionsList) {
+            if(single.getUserName().equals(name)){
+                nameTransaction.add(single);
+            }
+        }
+        return nameTransaction;
+    }
+
 
     public List<Customer> loadAllCustomers() {
         // TODO: 2022/12/7 waiting for Customer constructor -->waiting for Account Constructor
@@ -188,6 +198,17 @@ public class Admin {
             transactionsList.add(transaction);
         }
 
+    }
+
+    public HashMap<String, String> getFileMap() {
+        return fileMap;
+    }
+
+    public HashMap<String, ArrayList<String>> getUserInfo() {
+        return userInfo;
+    }
+    public List<Transaction> getTransactionsList() {
+        return transactionsList;
     }
 
 }
