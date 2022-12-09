@@ -38,7 +38,7 @@ public class MakeTransactionPanel extends JPanel{
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel2.add(label2);
-        panel2.add(comboBox1);
+        panel2.add(comboBox2);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(label3);
