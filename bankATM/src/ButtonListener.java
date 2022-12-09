@@ -35,7 +35,7 @@ public class ButtonListener implements ActionListener{
             } else {
                 PWHelper.loginSuccessful();
                 Login.dismiss();
-                new CustomerHome();
+                new CustomerHome(curUser);
             }
         } else if (Register.COMMAND_REGISTER.equals(command)) { // press register button
             System.out.println("Register Button pressed");

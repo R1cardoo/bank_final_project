@@ -18,10 +18,12 @@ public class Register {
 
     public static JButton backBtn = new JButton("back");
 
+    private static boolean initialized = false;
+
     public Register() {
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initFrame2();
+        initFrame();
         frame.setBounds(
                 new Rectangle(
                         (int) Login.frame.getBounds().getX()+ 50,
@@ -32,7 +34,8 @@ public class Register {
         frame.setVisible(true);
     }
 
-    public void initFrame2() {
+    public void initFrame() {
+        ButtonListener buttonListener = new ButtonListener();
         JPanel panel1 = new JPanel();
         panel1.add(Login.label1);
         panel1.add(Login.username);
@@ -46,13 +49,15 @@ public class Register {
         panel3.add(conpassword);
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        registerbtn.setActionCommand(COMMAND_REGISTER);
-        registerbtn.addActionListener(new ButtonListener());
         panel4.add(registerbtn);
-        backBtn.setActionCommand(COMMAND_BACK);
-        backBtn.addActionListener(new ButtonListener());
         panel4.add(backBtn);
-
+        if (!initialized) {
+            registerbtn.setActionCommand(COMMAND_REGISTER);
+            registerbtn.addActionListener(buttonListener);
+            backBtn.setActionCommand(COMMAND_BACK);
+            backBtn.addActionListener(buttonListener);
+            initialized = true;
+        }
 
         Box myVerticalBox = Box.createVerticalBox();
         myVerticalBox.add(panel1);

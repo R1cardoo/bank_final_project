@@ -27,7 +27,10 @@ public class CustomerHome {
 
     public static Box basePane;
 
-    public CustomerHome() { // 传入一个user
+    private Customer customer = null;
+
+    public CustomerHome(Customer curCustomer) { // 传入一个user
+        this.customer = curCustomer;
         frame.setSize(800, 600);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

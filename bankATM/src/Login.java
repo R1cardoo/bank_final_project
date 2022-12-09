@@ -14,6 +14,8 @@ public class Login {
     public static JButton Signinbtn = new JButton("LogIn");
     public static JButton registerbtn = new JButton("Register");
     public static JButton resetbtn = new JButton("Reset");
+
+    private static boolean initialized = false;
     public Login() {
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,6 +25,7 @@ public class Login {
     }
 
     private void initFrame() {
+        ButtonListener buttonListener = new ButtonListener();
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         panel1.add(username);
@@ -32,12 +35,16 @@ public class Login {
         panel2.add(password);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Signinbtn.setActionCommand(COMMAND_SIGNIN);
-        Signinbtn.addActionListener(new ButtonListener());
-        registerbtn.setActionCommand(COMMAND_REGISTER);
-        registerbtn.addActionListener(new ButtonListener());
-        resetbtn.setActionCommand(COMMAND_RESET);
-        resetbtn.addActionListener(new ButtonListener());
+        if (!initialized) {
+            Signinbtn.setActionCommand(COMMAND_SIGNIN);
+            Signinbtn.addActionListener(buttonListener);
+            registerbtn.setActionCommand(COMMAND_REGISTER);
+            registerbtn.addActionListener(buttonListener);
+            resetbtn.setActionCommand(COMMAND_RESET);
+            resetbtn.addActionListener(buttonListener);
+            initialized = true;
+        }
+
         panel3.add(Signinbtn);
         panel3.add(registerbtn);
         panel3.add(resetbtn);
