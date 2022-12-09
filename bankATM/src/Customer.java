@@ -1,7 +1,6 @@
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Customer extends User{
+public class Customer extends User {
 
     /**
      * balance

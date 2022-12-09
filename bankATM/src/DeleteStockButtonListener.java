@@ -1,0 +1,15 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class DeleteStockButtonListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        if (command.equals(DeleteStockPanel.COMMAND_SELECT_COMBOBOX)) {
+            // TODO only when a stock is selected, change Button to valid
+        } else if (command.equals(DeleteStockPanel.COMMAND_SUBMIT)) {
+            // TODO delete the stock
+        }
+
+    }
+}
