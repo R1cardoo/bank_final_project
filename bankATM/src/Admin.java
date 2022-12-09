@@ -23,7 +23,7 @@ public class Admin {
     private HashMap<String, ArrayList<String>> userInfo;
     private List<Transaction> transactionsList;
 
-    public Admin() throws IOException {
+    public Admin() {
         initFilePath();
         userInfo = new HashMap<>();
         updateUserMap();
@@ -157,17 +157,20 @@ public class Admin {
 
     //initial 3 files path: transaction, customer, account
     //if file does not exist, create the file and add it into mapping
-    public void initFilePath() throws IOException {
-        initFileMap();
-        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
-            String dir = rootDir1 + File.separator + rootDir2 + File.separator + entry.getKey() + fileType;
-            File f = new File(dir);
-            if (!f.exists()) {
-                f.createNewFile();
+    public void initFilePath() {
+        try {
+            initFileMap();
+            for (Map.Entry<String, String> entry : fileMap.entrySet()) {
+                String dir = rootDir1 + File.separator + rootDir2 + File.separator + entry.getKey() + fileType;
+                File f = new File(dir);
+                if (!f.exists()) {
+                    f.createNewFile();
+                }
+                fileMap.put(entry.getKey(), dir);
             }
-            fileMap.put(entry.getKey(), dir);
+        }catch (IOException e){
+            e.printStackTrace();
         }
-
     }
 
     public void initFileMap() {
