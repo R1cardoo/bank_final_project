@@ -16,8 +16,9 @@ import java.util.*;
     account:
      */
 public class Admin {
-    public static final String rootDir1 = "bankATM";
-    public static final String rootDir2 = "csvfiles";
+    public static final String rootDir = "..";
+    public static final String rootDir1="bankATM";
+    public static final String rootDir2="csvfiles";
     public static final String fileType = ".csv";
     private HashMap<String, String> fileMap;
     private HashMap<String, ArrayList<String>> userInfo;
@@ -160,7 +161,11 @@ public class Admin {
     public void initFilePath() {
         initFileMap();
         for (Map.Entry<String, String> entry : fileMap.entrySet()) {
+            //file path for running in intellij IDEA
             String dir = rootDir1 + File.separator + rootDir2 + File.separator + entry.getKey() + fileType;
+
+            //file path for running in terminal
+            //String dir = rootDir + File.separator +"csvfiles"+File.separator+ entry.getKey() + fileType;
             File f = new File(dir);
             if (!f.exists()) {
                 try {
