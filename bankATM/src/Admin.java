@@ -58,29 +58,29 @@ public class Admin {
     public List<Transaction> getTransByDate(long date) {
         //Returns all transactions for the date input
         //if date not exist, return null
-        List<Transaction> dailyTransaction=new ArrayList<>();
-        for (Transaction single: transactionsList) {
-            if(single.getDate()==date){
+        List<Transaction> dailyTransaction = new ArrayList<>();
+        for (Transaction single : transactionsList) {
+            if (single.getDate() == date) {
                 dailyTransaction.add(single);
             }
         }
-        if(dailyTransaction.size()==0){
+        if (dailyTransaction.size() == 0) {
             return null;
         }
         return dailyTransaction;
 
     }
 
-    public List<Transaction> getTransByName(String name){
+    public List<Transaction> getTransByName(String name) {
         //Returns all transactions for the name input
         //if name not exist, return null
-        List<Transaction> nameTransaction=new ArrayList<>();
-        for (Transaction single: transactionsList) {
-            if(single.getUserName().equals(name)){
+        List<Transaction> nameTransaction = new ArrayList<>();
+        for (Transaction single : transactionsList) {
+            if (single.getUserName().equals(name)) {
                 nameTransaction.add(single);
             }
         }
-        if(nameTransaction.size()==0){
+        if (nameTransaction.size() == 0) {
             return null;
         }
         return nameTransaction;
@@ -96,7 +96,6 @@ public class Admin {
         }
         return customers;
     }
-
 
 
     //write data to csv file
@@ -125,7 +124,7 @@ public class Admin {
             return true;
 
         } catch (Exception e) {
-            //e.printStackTrace();
+            System.err.format("saveFile error: %s%n", e);
             return false;
         }
     }
@@ -151,6 +150,7 @@ public class Admin {
             in.close();
             return all;
         } catch (Exception e) {
+            System.err.format("readFile error: %s%n", e);
             return null;
         }
     }
@@ -158,18 +158,18 @@ public class Admin {
     //initial 3 files path: transaction, customer, account
     //if file does not exist, create the file and add it into mapping
     public void initFilePath() {
-        try {
-            initFileMap();
-            for (Map.Entry<String, String> entry : fileMap.entrySet()) {
-                String dir = rootDir1 + File.separator + rootDir2 + File.separator + entry.getKey() + fileType;
-                File f = new File(dir);
-                if (!f.exists()) {
+        initFileMap();
+        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
+            String dir = rootDir1 + File.separator + rootDir2 + File.separator + entry.getKey() + fileType;
+            File f = new File(dir);
+            if (!f.exists()) {
+                try {
                     f.createNewFile();
+                } catch (IOException e) {
+                    System.err.format("createFile error: %s%n", e);
                 }
-                fileMap.put(entry.getKey(), dir);
             }
-        }catch (IOException e){
-            e.printStackTrace();
+            fileMap.put(entry.getKey(), dir);
         }
     }
 
@@ -219,6 +219,7 @@ public class Admin {
     public HashMap<String, ArrayList<String>> getUserInfo() {
         return userInfo;
     }
+
     public List<Transaction> getTransactionsList() {
         return transactionsList;
     }
