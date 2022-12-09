@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Manager extends User {
 
-    private UserHelper userHelper;
-
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
