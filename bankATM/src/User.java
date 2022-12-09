@@ -8,12 +8,12 @@ public class User implements Serializable {
     private String id;
     private boolean isLogin = false;
 
-    public static User login(String userName, String passWord) throws IOException{
+    public static Customer login(String userName, String passWord) throws IOException{
         Admin admin = new Admin();
         List<Customer> customers = admin.loadAllCustomers();
         for (Customer customer : customers) {
             if (customer.getUserName().equals(userName) && customer.getPassWord().equals(passWord)) {
-                return new User(customer.getUserName(),customer.getPassWord(),customer.getId(),true);
+                return customer;
             }
         }
         return null;

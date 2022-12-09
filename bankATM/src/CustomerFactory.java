@@ -33,7 +33,7 @@ public class CustomerFactory {
             customer.setId(UUID.randomUUID().toString());
             return true;
         }else {
-            System.err.println("Customer"+customer.getUserName()+"ID exists, please try a new one");
+            System.err.println("CustomerPortals" +customer.getUserName()+"ID exists, please try a new one");
             return false;
         }
 
