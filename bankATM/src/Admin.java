@@ -165,7 +165,7 @@ public class Admin {
             String dir = rootDir1 + File.separator + rootDir2 + File.separator + entry.getKey() + fileType;
 
             //file path for running in terminal
-            //String dir = rootDir + File.separator +"csvfiles"+File.separator+ entry.getKey() + fileType;
+            //String dir = rootDir + File.separator +rootDir2+File.separator+ entry.getKey() + fileType;
             File f = new File(dir);
             if (!f.exists()) {
                 try {
