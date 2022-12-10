@@ -8,7 +8,7 @@ public class Currency {
     private double value;  //the value of currency
     private String kind; //kind of currency  US dollar, pound, RMB, Rupee
 
-    public Currency(double value, String kind) {
+    public Currency(String kind, double value) {
         this.value = value;
         this.kind = kind;
     }
