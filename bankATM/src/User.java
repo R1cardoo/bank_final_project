@@ -5,7 +5,6 @@ import java.io.IOException;
 public class User implements Serializable {
     private String userName;
     private String passWord;
-    private String id;
     private boolean isLogin = false;
 
     public static Customer login(String userName, String passWord) throws IOException{
@@ -23,10 +22,9 @@ public class User implements Serializable {
 
     }
 
-    public User(String userName, String passWord, String id, boolean isLogin) {
+    public User(String userName, String passWord, boolean isLogin) {
         this.userName = userName;
         this.passWord = passWord;
-        this.id = id;
         this.isLogin = isLogin;
     }
 
@@ -56,14 +54,6 @@ public class User implements Serializable {
         this.passWord = passWord;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public boolean isLogin() {
         return isLogin;
     }
@@ -77,7 +67,6 @@ public class User implements Serializable {
         final StringBuffer sb = new StringBuffer("User{");
         sb.append("userName='").append(userName).append('\'');
         sb.append(", passWord='").append(passWord).append('\'');
-        sb.append(", id='").append(id).append('\'');
         sb.append(", isLogin=").append(isLogin);
         sb.append('}');
         return sb.toString();

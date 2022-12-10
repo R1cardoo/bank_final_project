@@ -36,10 +36,10 @@ public class Manager extends User {
 
 
 
-    public static String checkCustomer(String id) throws IOException {
+    public static String checkCustomer(String username) throws IOException {
         Admin admin = new Admin();
         for (Customer customer : admin.loadAllCustomers()) {
-            if (customer.getId().equals(id)){
+            if (customer.getUserName().equals(username)){
                 return "balance:"+customer.getBalance()+"\n\n";
             }
         }
