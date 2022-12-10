@@ -34,13 +34,9 @@ public class Customer extends User {
         super(userName,password);
     }
 
-    public Customer(String userName, String passWord, String id, boolean isLogin, double balance, String saveAccount, String checkAccount,
-                    ArrayList<Transaction> transactionArrayList) {
-        super(userName, passWord, id, isLogin);
+    public Customer(String userName, String passWord, boolean isLogin, double balance) {
+        super(userName, passWord,isLogin);
         this.balance = balance;
-        this.saveAccount = saveAccount;
-        this.checkAccount = checkAccount;
-        this.transactionArrayList=transactionArrayList;
     }
 
     public double getBalance() {
