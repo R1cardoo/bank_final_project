@@ -9,12 +9,7 @@ import java.util.*;
  */
 
 //this class is responsible for csv access
-// TODO: 2022/12/6 confirm customer info
-    /*
-    transaction:
-    customer:username, password, id, balance, account
-    account:
-     */
+// doneTODO: 2022/12/6 confirm customer info
 public class Admin {
     public static final String rootDir = "..";
     public static final String rootDir1="bankATM";
@@ -189,7 +184,8 @@ public class Admin {
     }
 
     /*
-    call this function to update any information to any files
+    call this function to update or edit any information to any files
+    e.g. balance reduce/ balance increase
     String keyName: whose information do you want to update
     ArrayList<String> newData: all values of the attributes (including new data and the original data)
     FilesName filesName: file type you want to edit
