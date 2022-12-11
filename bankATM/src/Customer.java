@@ -10,12 +10,15 @@ public class Customer extends User {
     /**
      *  SavingsAccount
      */
-    private String saveAccount;
+    private SavingsAccount savingsAccount;
 
     /**
      * CheckAccount
      */
-    private String checkAccount;
+    private CheckingAccount checkingAccount;
+
+
+    private SecuritiesAccount securitiesAccount;
 
 
     private ArrayList<Transaction> transactionArrayList  = new ArrayList<>();
@@ -47,32 +50,38 @@ public class Customer extends User {
         this.balance = balance;
     }
 
-    public String getSaveAccount() {
-        return saveAccount;
-    }
-
-    public void setSaveAccount(String saveAccount) {
-        this.saveAccount = saveAccount;
-    }
-
-    public String getCheckAccount() {
-        return checkAccount;
-    }
-
-    public void setCheckAccount(String checkAccount) {
-        this.checkAccount = checkAccount;
-    }
-
     public void addTransaction(Transaction transaction) {
         this.transactionArrayList.add(transaction);
+    }
+
+    public SavingsAccount getSaveAccount() {
+        return savingsAccount;
+    }
+
+    public void setSaveAccount(SavingsAccount saveAccount) {
+        this.savingsAccount = saveAccount;
+    }
+
+    public CheckingAccount getCheckAccount() {
+        return checkingAccount;
+    }
+
+    public void setCheckAccount(CheckingAccount checkAccount) {
+        this.checkingAccount = checkAccount;
+    }
+
+    public SecuritiesAccount getSecuritiesAccount() {
+        return securitiesAccount;
+    }
+
+    public void setSecuritiesAccount(SecuritiesAccount securitiesAccount) {
+        this.securitiesAccount = securitiesAccount;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Customer{");
         sb.append("balance=").append(balance);
-        sb.append(", saveAccount='").append(saveAccount).append('\'');
-        sb.append(", checkAccount='").append(checkAccount).append('\'');
         sb.append(", transactionArrayList=").append(transactionArrayList);
         sb.append('}');
         return sb.toString();
