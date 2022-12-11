@@ -10,7 +10,7 @@ import java.util.HashMap;
 //manager can update the latest exchange rate
 public class CurrencyHelper {
     // Our exchange rates are calculated using foreign currency to US dollar exchange rates.
-    private HashMap<String, Double> currencyConvert;
+    private HashMap<CurrencyType, Double> currencyConvert;
 
     public CurrencyHelper() {
         currencyConvert=new HashMap<>();
@@ -18,14 +18,14 @@ public class CurrencyHelper {
     }
 
     public void initialRate(){
-        currencyConvert.put("Pound",1.24);
-        currencyConvert.put("RMB",0.14);
-        currencyConvert.put("Rupee",0.012);
+        currencyConvert.put(CurrencyType.GBP,1.24);
+        currencyConvert.put(CurrencyType.CNY,0.14);
+        currencyConvert.put(CurrencyType.INR,0.012);
     }
 
     //add new kinds of currency or update currency already existed
-    public void updateRate(String kind,double value){
-        currencyConvert.put(kind, value);
+    public void updateRate(CurrencyType type,double value){
+        currencyConvert.put(type, value);
     }
 
     public double transferToDollar(String kind, double value){
@@ -33,11 +33,11 @@ public class CurrencyHelper {
     }
 
     //if our bank don't support a kind of currency anymore, call this func to delete it.
-    public boolean delCurrency(String kind){
-        if(!currencyConvert.containsKey(kind)){
+    public boolean delCurrency(CurrencyType type){
+        if(!currencyConvert.containsKey(type)){
            return false;  //currency does not exist
         }
-        currencyConvert.remove(kind);
+        currencyConvert.remove(type);
         return true;
 
     }

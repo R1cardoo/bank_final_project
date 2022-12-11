@@ -6,12 +6,12 @@
 
 public class Currency {
 
-    private String kind; //kind of currency  US dollar, pound, RMB, Rupee
+    private CurrencyType type; //kind of currency  US dollar, pound, RMB, Rupee
     private double value;  //the value of currency
 
-    public Currency(String kind, double value) {
+    public Currency(CurrencyType type, double value) {
         this.value = value;
-        this.kind = kind;
+        this.type=type;
     }
 
     public double getValue() {
@@ -22,11 +22,7 @@ public class Currency {
         this.value = value;
     }
 
-    public String getKind() {
-        return kind;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
+    public CurrencyType getType() {
+        return type;
     }
 }
