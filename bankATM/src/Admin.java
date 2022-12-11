@@ -188,6 +188,66 @@ public class Admin {
         }
     }
 
+    /*
+    call this function to update any information to any files
+    String keyName: whose information do you want to update
+    ArrayList<String> newData: all values of the attributes (including new data and the original data)
+    FilesName filesName: file type you want to edit
+     */
+    public boolean updateInfo(String keyName, ArrayList<String> newData,FilesName filesName){
+        ArrayList<ArrayList<String>> oldData=csv2Array(filesName);
+        int index=Integer.MAX_VALUE;
+        if(oldData==null){  //file not exist or file is empty
+            return false;
+        }
+        if(filesName.getFileName().equals("transaction")){
+            for (int i=0;i<oldData.size();i++){
+                if(oldData.get(i).get(1).equals(keyName)){
+                    index=i;
+                    break;
+                }
+            }
+        }else {
+            for (int i=0;i<oldData.size();i++){
+                if(oldData.get(i).get(0).equals(keyName)){
+                    index=i;
+                    break;
+                }
+            }
+        }
+        if(index==Integer.MAX_VALUE){ //file doest not contain the record of this key value
+            return false;
+        }
+        oldData.remove(index);
+        oldData.add(newData);
+        String path = fileMap.get(filesName);
+        BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8));
+            for (int i = 0; i < oldData.size(); i++){
+                for(int j=0;j< oldData.get(i).size();j++){
+                    out.write(oldData.get(i).get(j));
+                    out.write(",");
+                }
+                out.newLine();
+            }
+            out.flush();
+            out.close();
+            //doneTODO: 2022/12/7 update HashMap according to different type
+            if (filesName.getFileName().equals("customer")) {
+                updateUserMap();
+            } else if (filesName.getFileName().equals("transaction")) {
+                updateTransList();
+            }
+
+            return true;
+        } catch (Exception e) {
+            System.err.format("saveFile error: %s%n", e);
+            return false;
+        }
+
+    }
+
     //initial 3 files path: transaction, customer, account
     //if file does not exist, create the file and add it into mapping
     public void initFilePath() {
