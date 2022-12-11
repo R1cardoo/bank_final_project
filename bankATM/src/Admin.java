@@ -21,7 +21,7 @@ public class Admin {
     public static final String rootDir2="src";
     public static final String rootDir3="csvfiles";
     public static final String fileType = ".csv";
-    private HashMap<String, String> fileMap;
+    private HashMap<FilesName, String> fileMap;
     private HashMap<String, ArrayList<String>> userInfo;
     private List<Transaction> transactionsList;
 
@@ -52,10 +52,20 @@ public class Admin {
     }
 
 
-    // TODO: 2022/12/7 waiting for Account Constructor 
-//    public List<Account> getCustomerAccount(String username){
-//
-//    }
+    // doneTODO: 2022/12/7 waiting for Account Constructor
+    public List<Account> getCustomerAccount(String username){
+        List<Account> accounts=new ArrayList<>();
+        if(getCheckingByName(FilesName.CHECKING,username)!=null){
+            accounts.add(getCheckingByName(FilesName.CHECKING,username));
+        }
+        if(getSavingByName(FilesName.SAVING,username)!=null){
+            accounts.add(getSavingByName(FilesName.SAVING,username));
+        }
+        if (getSecuritiesByName(FilesName.SECURITIES,username)!=null){
+            accounts.add(getSecuritiesByName(FilesName.SECURITIES,username));
+        }
+        return accounts;
+    }
 
     public List<Transaction> getTransByDate(long date) {
         //Returns all transactions for the date input
@@ -90,22 +100,44 @@ public class Admin {
 
 
     public List<Customer> loadAllCustomers() {
-        // TODO: 2022/12/7 waiting for Customer constructor -->waiting for Account Constructor
+        // doneTODO: 2022/12/7 waiting for Customer constructor -->waiting for Account Constructor
         List<Customer> customers = new ArrayList<>();
         for (Map.Entry<String, ArrayList<String>> entry : userInfo.entrySet()) {
-//            Customer customer = new Customer();
-//            customers.add(customer);
+            ArrayList<String> person=entry.getValue();
+            String passWord=person.get(0);
+            boolean isLogin= Boolean.parseBoolean(person.get(1));
+            double balance= Double.parseDouble(person.get(2));
+            Customer customer = new Customer(entry.getKey(),passWord,isLogin,balance);
+            customers.add(customer);
+        }
+        for (Customer person: customers) {
+            for (Transaction transaction: transactionsList) {
+                if(transaction.getUserName().equals(person.getUserName())){
+                    person.addTransaction(transaction);
+                }
+            }
+            if(getCheckingByName(FilesName.CHECKING,person.getUserName())!=null){
+                person.setCheckAccount(getCheckingByName(FilesName.CHECKING,person.getUserName()));
+            }
+            if(getSavingByName(FilesName.SAVING,person.getUserName())!=null){
+                person.setSaveAccount(getSavingByName(FilesName.SAVING,person.getUserName()));
+            }
+            // doneTODO: 2022/12/10 security
+            if(getSecuritiesByName(FilesName.SECURITIES,person.getUserName())!=null){
+                person.setSecuritiesAccount(getSecuritiesByName(FilesName.SECURITIES,person.getUserName()));
+            }
+
         }
         return customers;
     }
 
 
     //write data to csv file
-    public boolean array2CSV(String type, List<String> data) {
-        if (!fileMap.containsKey(type)) {
+    public boolean array2CSV(FilesName filesName, List<String> data) {
+        if (!fileMap.containsKey(filesName)) {
             return false;
         }
-        String path = fileMap.get(type);
+        String path = fileMap.get(filesName);
         BufferedWriter out = null;
         try {
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, true), StandardCharsets.UTF_8));
@@ -116,15 +148,14 @@ public class Admin {
             out.newLine();
             out.flush();
             out.close();
-            //TODO: 2022/12/7 update HashMap according to different type
-            if (type.equals("customer")) {
+            //doneTODO: 2022/12/7 update HashMap according to different type
+            if (filesName.getFileName().equals("customer")) {
                 updateUserMap();
-            } else if (type.equals("transaction")) {
+            } else if (filesName.getFileName().equals("transaction")) {
                 updateTransList();
             }
 
             return true;
-
         } catch (Exception e) {
             System.err.format("saveFile error: %s%n", e);
             return false;
@@ -132,11 +163,11 @@ public class Admin {
     }
 
     //read data from csv file
-    public ArrayList<ArrayList<String>> csv2Array(String type) {
-        if (!fileMap.containsKey(type)) {
+    public ArrayList<ArrayList<String>> csv2Array(FilesName filesName) {
+        if (!fileMap.containsKey(filesName)) {
             return null;
         }
-        String path = fileMap.get(type);
+        String path = fileMap.get(filesName);
         BufferedReader in = null;
         try {
             in = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
@@ -161,9 +192,9 @@ public class Admin {
     //if file does not exist, create the file and add it into mapping
     public void initFilePath() {
         initFileMap();
-        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
+        for (Map.Entry<FilesName, String> entry : fileMap.entrySet()) {
             //file path for running in intellij IDEA
-            String dir = rootDir1 + File.separator + rootDir2 + File.separator+ rootDir3+File.separator + entry.getKey() + fileType;
+            String dir = rootDir1 + File.separator + rootDir2 + File.separator+ rootDir3+File.separator + entry.getKey().getFileName() + fileType;
 
             //file path for running in terminal
             //String dir = rootDir + File.separator +rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
@@ -179,18 +210,139 @@ public class Admin {
         }
     }
 
-    public void initFileMap() {
-        fileMap = new HashMap<>();
-        fileMap.put("customer", "");
-        fileMap.put("transaction", "");
-        fileMap.put("account", "");
+    public CheckingAccount getCheckingByName(FilesName filesName,String name){
+        ArrayList<String> personInfo=getPersonInfo(filesName,name);
+        if(personInfo.size()==0){
+            return null;
+        }
+        String username=personInfo.get(0);
+        double balance= Double.parseDouble(personInfo.get(1));
+        //account type--> TypeOfAccount.Checking
+
+        List<Currency> currencies=getCurrencyList(personInfo,3,2);
+        int afterIndex=2+2*CurrencyType.values().length;
+        int loanAmount= Integer.parseInt(personInfo.get(++afterIndex));  //currency.type+1
+        return  new CheckingAccount(username,balance,TypeOfAccount.Checking,currencies,loanAmount);
+
+    }
+
+    public SavingsAccount getSavingByName(FilesName filesName,String name){
+        ArrayList<String> personInfo=getPersonInfo(filesName,name);
+        if(personInfo.size()==0){
+            return null;
+        }
+        String username=personInfo.get(0);
+        double balance= Double.parseDouble(personInfo.get(1));
+
+        //account type-->set enum
+
+        List<Currency> currencies=getCurrencyList(personInfo,3,2);
+        return new SavingsAccount(username,balance,TypeOfAccount.Savings,currencies);
+
     }
 
 
-    //when the data of user.csv is changed, call this func to update userInfo hashmap.
+    public SecuritiesAccount getSecuritiesByName(FilesName filesName,String name){
+        ArrayList<String> personInfo;
+        personInfo=getPersonInfo(filesName,name);
+        if(personInfo.size()==0){
+            return null;
+        }
+        String username=personInfo.get(0);
+        double balance= Double.parseDouble(personInfo.get(1));
+
+        //account type-->set enum
+
+        List<Currency> currencies=getCurrencyList(personInfo,3,2);
+        int afterIndex=2+2*CurrencyType.values().length;
+        boolean enabled= Boolean.parseBoolean(personInfo.get(++afterIndex));  //currency.type+1
+        double realizedProfit= Double.parseDouble(personInfo.get(++afterIndex));
+        double unrealizedProfit= Double.parseDouble(personInfo.get(++afterIndex));
+        //csv file stores stock name
+        List<Stock> stockOwned=new ArrayList<>();
+        for(int i=++afterIndex;i<personInfo.size();i++){
+            Stock stock=getStockByName(personInfo.get(i));
+            stockOwned.add(stock);
+        }
+        return new SecuritiesAccount(username,balance,TypeOfAccount.Securities,currencies,enabled,realizedProfit,unrealizedProfit,stockOwned);
+
+    }
+
+    public List<Currency> getCurrencyList( ArrayList<String> personInfo,int startIndex, int gap){
+        List<Currency> currencies=new ArrayList<>();
+        double value=0.0;
+        for(int i=startIndex;i+1<startIndex+2*CurrencyType.values().length;){
+            String kind=personInfo.get(i);
+            if(!personInfo.get(i+1).equals(" ")){
+               value= Double.parseDouble(personInfo.get(i+1));
+            }else{
+                value=0.0;
+            }
+            // TODO: 2022/12/10 Check  CurrencyType.valueOf
+            Currency currency=new Currency(CurrencyType.valueOf(kind),value);
+            currencies.add(currency);
+            i+=gap;
+        }
+        return currencies;
+
+    }
+
+    public ArrayList<String> getPersonInfo(FilesName filesName,String name){
+        ArrayList<ArrayList<String>> AccountList=csv2Array(filesName);
+        ArrayList<String> personInfo=new ArrayList<>();
+        for (ArrayList<String> row:AccountList) {
+            if(row.get(0).equals(name)){
+                personInfo=row;
+                break;
+            }
+        }
+        return personInfo;
+    }
+
+    public List<Stock> loadStockInfo(){
+        ArrayList<ArrayList<String>> stockList= csv2Array(FilesName.STOCK);
+        List<Stock> stocksArray=new ArrayList<>();
+        for (ArrayList<String> row:stockList) {
+            String stockName=row.get(0);
+            int stockId=Integer.parseInt(row.get(1));
+            double stockPrice=Double.parseDouble(row.get(2));
+            boolean enabled=Boolean.parseBoolean(row.get(3));
+            List<Double> historyPrice=new ArrayList<>();
+            for(int i=4;i<row.size();i++){
+                historyPrice.add(Double.valueOf(row.get(i)));
+            }
+            Stock stock=new Stock(stockName,stockId,stockPrice,enabled,historyPrice);
+            stocksArray.add(stock);
+        }
+        return stocksArray;
+    }
+
+    public Stock getStockByName(String stockName){
+        List<Stock> allStock=loadStockInfo();
+        Stock get=null;
+        for (Stock stock:allStock) {
+            if(stock.getStockName().equals(stockName)){
+                get=stock;
+                break;
+            }
+        }
+        //stock doest not exist return null;
+        return get;
+    }
+
+
+    public void initFileMap() {
+        fileMap = new HashMap<>();
+        for (FilesName name: FilesName.values()) {
+            fileMap.put(name,"");
+        }
+    }
+
+
+    //when the data of customer.csv is changed, call this func to update userInfo hashmap.
     public void updateUserMap() {
         userInfo.clear();
-        ArrayList<ArrayList<String>> users = csv2Array("customer");
+        ArrayList<ArrayList<String>> users = csv2Array(FilesName.CUSTOMER);
         for (ArrayList<String> single : users) {
             String name = single.get(0);
             single.remove(0);
@@ -201,7 +353,7 @@ public class Admin {
     //when the data of transaction.csv is changed, call this func to update transaction list.
     public void updateTransList() {
         transactionsList.clear();
-        ArrayList<ArrayList<String>> transactions = csv2Array("transaction");
+        ArrayList<ArrayList<String>> transactions = csv2Array(FilesName.TRANSACTION);
         for (List<String> row : transactions) {
             // done: 2022/12/7 check data type
             // done: 2022/12/7 waiting for transaction constructor
@@ -218,7 +370,7 @@ public class Admin {
 
     }
 
-    public HashMap<String, String> getFileMap() {
+    public HashMap<FilesName, String> getFileMap() {
         return fileMap;
     }
 
