@@ -19,6 +19,22 @@ public class SecuritiesAccount extends Account {
     }
 
     //need to add these methods: buyStocks() and sellStocks()
-    //but these are related to the StockMarket class so need to work on that first
+    //but these methods are related to the StockMarket class so need to work on that first?
+
+    public double getRealizedProfit() {
+        return realizedProfit;
+    }
+
+    public void setRealizedProfit(double realizedProfit) {
+        this.realizedProfit = realizedProfit;
+    }
+
+    public double getUnrealizedProfit() {
+        return unrealizedProfit;
+    }
+
+    public void setUnrealizedProfit(double unrealizedProfit) {
+        this.unrealizedProfit = unrealizedProfit;
+    }
 
 }
