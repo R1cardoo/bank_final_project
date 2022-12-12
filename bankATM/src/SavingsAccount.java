@@ -9,7 +9,7 @@ public class SavingsAccount extends Account {
         super(username, balance, type, currencies);
     }
 
-    public void addInterest() {
+    public void addInterest() { //interest if the balance is high in the savings account
         if (this.getBalance() > Constants.getMinimumSavingsAccountBalanceForSecurities()) {
             this.setBalance(this.getBalance() + (this.getBalance() * Constants.getSavingsAccountInterestPercentage()));
         }
