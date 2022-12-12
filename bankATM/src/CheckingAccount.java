@@ -5,18 +5,18 @@ import java.util.List;
  */
 public class CheckingAccount extends Account {
 
-    private int loanAmount;
+    private double loanAmount;
 
-    public CheckingAccount(String username, double balance, TypeOfAccount type, List<Currency> currencies, int loanAmount) {
+    public CheckingAccount(String username, double balance, TypeOfAccount type, List<Currency> currencies, double loanAmount) {
         super(username, balance, type, currencies);
         this.loanAmount = loanAmount;
     }
 
-    public int getLoanAmount() {
+    public double getLoanAmount() {
         return loanAmount;
     }
 
-    public void setLoanAmount(int loanAmount) {
+    public void setLoanAmount(double loanAmount) {
         this.loanAmount = loanAmount;
     }
 
