@@ -1,20 +1,24 @@
 import java.util.List;
 
 /**
- * this abstract class is to represent any type of Account
+ * this class is to represent any type of Account
  */
-public abstract class Account {
+public class Account {
 
     private String username;
     private double balance;
     private TypeOfAccount type;
     private List<Currency> currencies;
-    
+
     public Account(String username, double balance, TypeOfAccount type, List<Currency> currencies) {
         this.username = username;
         this.balance = balance;
         this.type = type;
         this.currencies = currencies;
+    }
+
+    public Account() {
+
     }
 
     public String getUsername() {
@@ -39,6 +43,14 @@ public abstract class Account {
 
     public void setCurrencies(List<Currency> currencies) {
         this.currencies = currencies;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setType(TypeOfAccount type) {
+        this.type = type;
     }
 
     public void depositMoney(double amount) {
