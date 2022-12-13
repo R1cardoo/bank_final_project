@@ -10,9 +10,10 @@ public class SecuritiesAccount extends Account {
     private boolean enabled;
     private double realizedProfit;
     private double unrealizedProfit;
-    private HashMap<Stock,Integer> stockOwned;
+    //key:Stock,   value: buy price, count
+    private HashMap<Stock,ArrayList<Double>> stockOwned;
 
-    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, HashMap<Stock, Integer> stockOwned) {
+    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, HashMap<Stock,ArrayList<Double>> stockOwned) {
         super(username, type, currencies);
         this.enabled = enabled;
         this.realizedProfit = realizedProfit;
@@ -20,7 +21,7 @@ public class SecuritiesAccount extends Account {
         this.stockOwned = stockOwned;
     }
 
-    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double realizedProfit, double unrealizedProfit, HashMap<Stock, Integer> stockOwned) {
+    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double realizedProfit, double unrealizedProfit, HashMap<Stock,ArrayList<Double>> stockOwned) {
         super(username, type, currencies);
         this.realizedProfit = realizedProfit;
         this.unrealizedProfit = unrealizedProfit;
