@@ -25,7 +25,7 @@ public class Manager extends User {
      * @throws ParseException
      */
     public String getDailyReport(){
-        Admin admin = new Admin();
+        Admin admin = Admin.getInstance();
         List<Customer> customers = admin.loadAllCustomers();
         double count = 0;
         for (Customer customer : customers) {
@@ -37,7 +37,7 @@ public class Manager extends User {
 
 
     public static String checkCustomer(String username) throws IOException {
-        Admin admin = new Admin();
+        Admin admin = Admin.getInstance();
         for (Customer customer : admin.loadAllCustomers()) {
             if (customer.getUserName().equals(username)){
                 return "balance:"+customer.getBalance()+"\n\n";
@@ -61,7 +61,7 @@ public class Manager extends User {
     }
 
     public static void newDay(){
-        Admin admin = new Admin();
+        Admin admin = Admin.getInstance();
         for (Customer customer : admin.loadAllCustomers()) {
             //deposit gain interest
             payInterest(customer);

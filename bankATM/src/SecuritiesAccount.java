@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,8 +11,10 @@ public class SecuritiesAccount extends Account {
     private double unrealizedProfit;
     private List<Stock> stockOwned;
 
-    public SecuritiesAccount(String username, double balance, TypeOfAccount type, List<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, List<Stock> stockOwned) {
-        super(username, balance, type, currencies);
+    private ArrayList<Integer> ownedNum;
+
+    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, List<Stock> stockOwned) {
+        super(username, type, currencies);
         this.enabled = enabled;
         this.realizedProfit = realizedProfit;
         this.unrealizedProfit = unrealizedProfit;

@@ -27,10 +27,10 @@ public class CustomerHome {
 
     public static Box basePane;
 
-    private Customer customer = null;
+    private static Customer customer = null;
 
     public CustomerHome(Customer curCustomer) { // 传入一个user
-        this.customer = curCustomer;
+        customer = curCustomer;
         frame.setSize(800, 600);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,6 +79,10 @@ public class CustomerHome {
         basePane.add(panel6);
 
         frame.setContentPane(basePane);
+    }
+
+    public static Customer getCustomer() {
+        return customer;
     }
 
     public static void dismiss() {

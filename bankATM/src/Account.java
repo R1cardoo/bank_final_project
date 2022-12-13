@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -6,13 +7,11 @@ import java.util.List;
 public class Account {
 
     private String username;
-    private double balance;
     private TypeOfAccount type;
-    private List<Currency> currencies;
+    private ArrayList<Currency> currencies;
 
-    public Account(String username, double balance, TypeOfAccount type, List<Currency> currencies) {
+    public Account(String username, TypeOfAccount type, ArrayList<Currency> currencies) {
         this.username = username;
-        this.balance = balance;
         this.type = type;
         this.currencies = currencies;
     }
@@ -25,13 +24,6 @@ public class Account {
         return username;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 
     public TypeOfAccount getType() {
         return type;
@@ -41,7 +33,7 @@ public class Account {
         return currencies;
     }
 
-    public void setCurrencies(List<Currency> currencies) {
+    public void setCurrencies(ArrayList<Currency> currencies) {
         this.currencies = currencies;
     }
 
@@ -53,17 +45,14 @@ public class Account {
         this.type = type;
     }
 
-    public void depositMoney(double amount) {
-        this.balance += amount;
-    }
 
     public void withdrawMoney(double amount) {
-        if (balance > amount) { //withdraw only if current balance is more than amount that needs to be withdrawn
-            this.balance -= amount;
-        }
-        else {
-            System.out.println("Not enough balance"); //show not enough balance in GUI
-        }
+//        if (balance > amount) { //withdraw only if current balance is more than amount that needs to be withdrawn
+//            this.balance -= amount;
+//        }
+//        else {
+//            System.out.println("Not enough balance"); //show not enough balance in GUI
+//        }
     }
 
 }

@@ -8,7 +8,7 @@ public class User implements Serializable {
     private boolean isLogin = false;
 
     public static Customer login(String userName, String passWord) throws IOException{
-        Admin admin = new Admin();
+        Admin admin = Admin.getInstance();
         List<Customer> customers = admin.loadAllCustomers();
         for (Customer customer : customers) {
             if (customer.getUserName().equals(userName) && customer.getPassWord().equals(passWord)) {

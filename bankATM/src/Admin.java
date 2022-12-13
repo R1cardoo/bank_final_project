@@ -11,6 +11,15 @@ import java.util.*;
 //this class is responsible for csv access
 // doneTODO: 2022/12/6 confirm customer info
 public class Admin {
+
+    private static Admin instance = null;
+
+    public static Admin getInstance() {
+        if (instance == null) {
+            instance = new Admin();
+        }
+        return instance;
+    }
     public static final String rootDir = "..";
     public static final String rootDir1="bankATM";
     public static final String rootDir2="src";
@@ -190,7 +199,7 @@ public class Admin {
     ArrayList<String> newData: all values of the attributes (including new data and the original data)
     FilesName filesName: file type you want to edit
      */
-    public boolean updateInfo(String keyName, ArrayList<String> newData,FilesName filesName){
+    public boolean updateInfo(String keyName, ArrayList<String> newData, FilesName filesName){
         ArrayList<ArrayList<String>> oldData=csv2Array(filesName);
         int index=Integer.MAX_VALUE;
         if(oldData==null){  //file not exist or file is empty
@@ -250,10 +259,10 @@ public class Admin {
         initFileMap();
         for (Map.Entry<FilesName, String> entry : fileMap.entrySet()) {
             //file path for running in intellij IDEA
-            String dir = rootDir1 + File.separator + rootDir2 + File.separator+ rootDir3+File.separator + entry.getKey().getFileName() + fileType;
+            String dir = rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
 
             //file path for running in terminal
-            //String dir = rootDir + File.separator +rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
+            // String dir = rootDir + File.separator +rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
             File f = new File(dir);
             if (!f.exists()) {
                 try {
@@ -266,35 +275,47 @@ public class Admin {
         }
     }
 
+    public boolean updateCheckingAccount(CheckingAccount checkingAccount) {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(checkingAccount.getUsername());
+        // data.add()
+
+        return updateInfo(checkingAccount.getUsername(), data, FilesName.CHECKING);
+    }
+
+    public boolean updateSavingsAccount(SavingsAccount savingsAccount) {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(savingsAccount.getUsername());
+        // data.add()
+
+        return updateInfo(savingsAccount.getUsername(), data, FilesName.CHECKING);
+    }
+
     public CheckingAccount getCheckingByName(FilesName filesName,String name){
         ArrayList<String> personInfo=getPersonInfo(filesName,name);
         if(personInfo.size()==0){
             return null;
         }
         String username=personInfo.get(0);
-        double balance= Double.parseDouble(personInfo.get(1));
         //account type--> TypeOfAccount.Checking
 
-        List<Currency> currencies=getCurrencyList(personInfo,3,2);
+        ArrayList<Currency> currencies=getCurrencyList(personInfo,3,2);
         int afterIndex=2+2*CurrencyType.values().length;
         int loanAmount= Integer.parseInt(personInfo.get(++afterIndex));  //currency.type+1
-        return  new CheckingAccount(username,balance,TypeOfAccount.Checking,currencies,loanAmount);
+        return  new CheckingAccount(username, TypeOfAccount.Checking, currencies,loanAmount);
 
     }
 
-    public SavingsAccount getSavingByName(FilesName filesName,String name){
-        ArrayList<String> personInfo=getPersonInfo(filesName,name);
-        if(personInfo.size()==0){
+    public SavingsAccount getSavingByName(FilesName filesName, String username){
+        ArrayList<String> personInfo=getPersonInfo(filesName,username);
+        if(personInfo.size()==0) {
             return null;
         }
-        String username=personInfo.get(0);
-        double balance= Double.parseDouble(personInfo.get(1));
 
         //account type-->set enum
 
-        List<Currency> currencies=getCurrencyList(personInfo,3,2);
-        return new SavingsAccount(username,balance,TypeOfAccount.Savings,currencies);
-
+        ArrayList<Currency> currencies=getCurrencyList(personInfo,3,2);
+        return new SavingsAccount(username,TypeOfAccount.Savings,currencies);
     }
 
 
@@ -305,11 +326,10 @@ public class Admin {
             return null;
         }
         String username=personInfo.get(0);
-        double balance= Double.parseDouble(personInfo.get(1));
 
         //account type-->set enum
 
-        List<Currency> currencies=getCurrencyList(personInfo,3,2);
+        ArrayList<Currency> currencies=getCurrencyList(personInfo,3,2);
         int afterIndex=2+2*CurrencyType.values().length;
         boolean enabled= Boolean.parseBoolean(personInfo.get(++afterIndex));  //currency.type+1
         double realizedProfit= Double.parseDouble(personInfo.get(++afterIndex));
@@ -320,12 +340,12 @@ public class Admin {
             Stock stock=getStockByName(personInfo.get(i));
             stockOwned.add(stock);
         }
-        return new SecuritiesAccount(username,balance,TypeOfAccount.Securities,currencies,enabled,realizedProfit,unrealizedProfit,stockOwned);
+        return new SecuritiesAccount(username, TypeOfAccount.Securities,currencies,enabled,realizedProfit,unrealizedProfit,stockOwned);
 
     }
 
-    public List<Currency> getCurrencyList( ArrayList<String> personInfo,int startIndex, int gap){
-        List<Currency> currencies=new ArrayList<>();
+    public ArrayList<Currency> getCurrencyList( ArrayList<String> personInfo,int startIndex, int gap){
+        ArrayList<Currency> currencies=new ArrayList<>();
         double value=0.0;
         for(int i=startIndex;i+1<startIndex+2*CurrencyType.values().length;){
             String kind=personInfo.get(i);

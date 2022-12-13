@@ -21,6 +21,7 @@ public class ButtonListener implements ActionListener{
                 } else {
                     PWHelper.loginFailed();
                 }
+                return;
             }
 
             Customer curUser = null;

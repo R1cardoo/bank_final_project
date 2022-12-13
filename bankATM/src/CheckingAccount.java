@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,8 +8,8 @@ public class CheckingAccount extends Account {
 
     private double loanAmount;
 
-    public CheckingAccount(String username, double balance, TypeOfAccount type, List<Currency> currencies, double loanAmount) {
-        super(username, balance, type, currencies);
+    public CheckingAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double loanAmount) {
+        super(username, type, currencies);
         this.loanAmount = loanAmount;
     }
 

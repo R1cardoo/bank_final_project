@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -5,13 +6,17 @@ import java.util.List;
  */
 public class SavingsAccount extends Account {
 
-    public SavingsAccount(String username, double balance, TypeOfAccount type, List<Currency> currencies) {
-        super(username, balance, type, currencies);
+    public SavingsAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies) {
+        super(username, type, currencies);
     }
 
     public void addInterest() { //interest if the balance is high in the savings account
         if (this.getBalance() > Constants.getMinimumSavingsAccountBalanceForSecurities()) {
-            this.setBalance(this.getBalance() + (this.getBalance() * Constants.getSavingsAccountInterestPercentage()));
+            double balance = this.getBalance() + (this.getBalance() * Constants.getSavingsAccountInterestPercentage());
+            this.setBalance(balance);
+            // directly update the
+
+
         }
     }
 

@@ -40,12 +40,13 @@ public class AccountHelper { //confirm this because I'm not sure about how this 
     }
 
     public boolean buyStock() {
-        if (isRich()) {
-            account.buyStock();
-            return true;
-        } else {
-            return false;
-        }
+//        if (isRich()) {
+//            account.buyStock();
+//            return true;
+//        } else {
+//            return false;
+//        }
+        return false;
     }
 
     public boolean sellStock() {
