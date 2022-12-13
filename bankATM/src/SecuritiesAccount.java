@@ -47,4 +47,11 @@ public class SecuritiesAccount extends Account {
         this.unrealizedProfit = unrealizedProfit;
     }
 
+    public HashMap<Stock, ArrayList<Double>> getStockOwned() {
+        return stockOwned;
+    }
+
+    public void setStockOwned(HashMap<Stock, ArrayList<Double>> stockOwned) {
+        this.stockOwned = stockOwned;
+    }
 }
