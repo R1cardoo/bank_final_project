@@ -274,6 +274,85 @@ public class Admin {
             fileMap.put(entry.getKey(), dir);
         }
     }
+/*
+interface to save and modify files
+ */
+
+    public boolean saveNameAndPSWD(Customer customer){
+        //call this function to save a new customer's username and password
+        ArrayList<String> data = new ArrayList<>();
+        data.add(customer.getUserName());
+        data.add(customer.getPassWord());
+        return array2CSV(FilesName.CUSTOMER,data);
+    }
+
+    public boolean saveTransaction(Transaction transaction){
+        //when a new transaction created, call this function
+        ArrayList<String> data = new ArrayList<>();
+        data.add(String.valueOf(transaction.getDate()));
+        data.add(transaction.getUserName());
+        data.add(transaction.getAccountType());
+        data.add(String.valueOf(transaction.getFeeCharged()));
+        data.add(String.valueOf(transaction.getAmount()));
+        data.add(transaction.getCurrency());
+        data.add(transaction.getTransactionType());
+        return array2CSV(FilesName.TRANSACTION,data);
+    }
+
+    public boolean saveSecurities(SecuritiesAccount securitiesAccount){
+        //when a new security account is created, call this function
+        ArrayList<String> data = new ArrayList<>();
+        data.add(securitiesAccount.getUsername());
+        data.add(TypeOfAccount.Securities.getTypeOfAccount());
+        for (Currency currency: securitiesAccount.getCurrencies()) {
+            data.add(String.valueOf(currency.getType()));
+            data.add(String.valueOf(currency.getValue()));
+        }
+        data.add(String.valueOf(securitiesAccount.getRealizedProfit()));
+        data.add(String.valueOf(securitiesAccount.getUnrealizedProfit()));
+        for (Map.Entry<Stock,ArrayList<Double>> entry:securitiesAccount.getStockOwned().entrySet()) {
+            data.add(entry.getKey().getStockName());
+            data.add(String.valueOf(entry.getValue().get(0)));
+            data.add(String.valueOf(entry.getValue().get(1)));
+        }
+        return array2CSV(FilesName.SECURITIES,data);
+    }
+
+    public boolean saveSaving(SavingsAccount savingsAccount){
+        //when a new saving account is created, call this function
+        ArrayList<String> data = new ArrayList<>();
+        data.add(savingsAccount.getUsername());
+        data.add(TypeOfAccount.Savings.getTypeOfAccount());
+        for (Currency currency: savingsAccount.getCurrencies()) {
+            data.add(String.valueOf(currency.getType()));
+            data.add(String.valueOf(currency.getValue()));
+        }
+        return array2CSV(FilesName.SAVING,data);
+    }
+
+    public boolean saveChecking(CheckingAccount checkingAccount){
+        //when a new saving account is created, call this function
+        ArrayList<String> data = new ArrayList<>();
+        data.add(checkingAccount.getUsername());
+        data.add(TypeOfAccount.Checking.getTypeOfAccount());
+        for (Currency currency: checkingAccount.getCurrencies()) {
+            data.add(String.valueOf(currency.getType()));
+            data.add(String.valueOf(currency.getValue()));
+        }
+        data.add(String.valueOf(checkingAccount.getLoanAmount()));
+        return array2CSV(FilesName.CHECKING,data);
+
+    }
+
+    public boolean saveStock(Stock stock){
+        //when a new stock is added, call this function
+        ArrayList<String> data = new ArrayList<>();
+        data.add(stock.getStockName());
+        data.add(String.valueOf(stock.getStockId()));
+        data.add(String.valueOf(stock.getStockPrice()));
+        return array2CSV(FilesName.STOCK,data);
+    }
+
 
     // TODO: 2022/12/12 updateInfo wrap up
     public boolean updatePSWD(Customer customer){
