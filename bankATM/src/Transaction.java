@@ -47,10 +47,10 @@ public class Transaction implements Serializable {
     public String toString() {
         return "Transaction{" +
                 "userName='" + userName + '\'' +
-                ", accountType='" + accountType + '\'' +
+                ", accountType='" + accountType + '\'' + "<br>" +
                 ", date=" + date +
                 ", feeCharged=" + feeCharged +
-                ", amount=" + amount +
+                ", amount=" + amount + "<br>" +
                 ", currency='" + currency + '\'' +
                 ", transactionType='" + transactionType + '\'' +
                 '}';

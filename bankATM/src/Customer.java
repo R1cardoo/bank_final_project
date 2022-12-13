@@ -71,12 +71,12 @@ public class Customer extends User {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Customer{");
-        sb.append("balance=")
-                .append(this.checkingAccount.toString()).append("\n")
-                .append(this.savingsAccount.toString()).append("\n")
-                .append(this.securitiesAccount.toString()).append("\n");
-        sb.append(", transactionArrayList=").append(transactionArrayList);
+        final StringBuffer sb = new StringBuffer("Customer: " + this.getUserName() + "<br><br>");
+        sb.append("Accounts: <br>")
+                .append(this.checkingAccount.toString()).append("<br>")
+                .append(this.savingsAccount.toString()).append("<br>")
+                .append(this.securitiesAccount.toString()).append("<br><br>");
+        sb.append(", transactionArrayList=<br>").append(transactionArrayList.toString());
         sb.append('}');
         return sb.toString();
     }

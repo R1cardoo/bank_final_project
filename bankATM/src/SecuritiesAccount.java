@@ -7,19 +7,10 @@ import java.util.List;
  */
 public class SecuritiesAccount extends Account {
 
-    private boolean enabled;
     private double realizedProfit;
     private double unrealizedProfit;
     //key:Stock,   value: buy price, count
     private HashMap<Stock,ArrayList<Double>> stockOwned;
-
-    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, HashMap<Stock,ArrayList<Double>> stockOwned) {
-        super(username, type, currencies);
-        this.enabled = enabled;
-        this.realizedProfit = realizedProfit;
-        this.unrealizedProfit = unrealizedProfit;
-        this.stockOwned = stockOwned;
-    }
 
     public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double realizedProfit, double unrealizedProfit, HashMap<Stock,ArrayList<Double>> stockOwned) {
         super(username, type, currencies);
@@ -121,5 +112,10 @@ public class SecuritiesAccount extends Account {
         }
         System.out.println("No such stock");
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "SecuritiesAccount:<br>" + this.getCurrencies().toString() + "<br>" + "realizedProfit: " + realizedProfit + "<br>" + "unRealizedProfit: " + unrealizedProfit + "<br>" + stockOwned.toString();
     }
 }

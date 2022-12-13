@@ -25,4 +25,9 @@ public class Currency {
     public CurrencyType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "   " + type + ": " + value + "<br>";
+    }
 }

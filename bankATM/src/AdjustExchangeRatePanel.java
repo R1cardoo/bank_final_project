@@ -20,7 +20,7 @@ public class AdjustExchangeRatePanel extends JPanel{
 
     public AdjustExchangeRatePanel() {
         ManagerHome.frame.setTitle("Adjust Exchange Rate");
-        ManagerHome.frame.setSize(600, 800);
+        ManagerHome.frame.setSize(400, 300);
         initPanel();
     }
 

@@ -35,7 +35,7 @@ public class UpdateStockPanel extends JPanel{
         comboBox.addActionListener(new UpdateStockButtonListener());
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel1.add(label2);
+        panel2.add(label2);
         panel2.add(price);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));

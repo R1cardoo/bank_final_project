@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class AccountInfoPanel extends JPanel{
     public static JButton backBtn = new JButton("back");
-    public static JLabel label = new JLabel("null");
+    public static JLabel label = new JLabel("null", JLabel.CENTER);
 
     public AccountInfoPanel(JFrame frame, Box basePane, String accountInfo) {
         frame.setTitle("Account Info");
@@ -17,7 +17,8 @@ public class AccountInfoPanel extends JPanel{
         backBtn.addActionListener(new BackButtonListener(frame, basePane));
 
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        label.setText(accountInfo);
+        label.setText("<html><body>" +accountInfo + "<body></html>");
+        label.setBounds(100,100,300,600);
         panel1.add(label);
 
         Box vBox = Box.createVerticalBox();

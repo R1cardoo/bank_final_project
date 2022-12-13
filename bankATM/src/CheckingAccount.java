@@ -44,4 +44,8 @@ public class CheckingAccount extends Account {
         Admin.getInstance().updateChecking(this);
     }
 
+    @Override
+    public String toString() {
+        return "CheckingAccount:<br>" + this.getCurrencies().toString() + "<br>" + "loan: " + loanAmount + "<br>";
+    }
 }

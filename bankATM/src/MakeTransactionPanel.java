@@ -20,7 +20,7 @@ public class MakeTransactionPanel extends JPanel{
 
     public MakeTransactionPanel() { // TODO input user
         CustomerHome.frame.setTitle("Make Transaction");
-        CustomerHome.frame.setSize(350, 200);
+        CustomerHome.frame.setSize(400, 500);
 
         initPanel();
     }

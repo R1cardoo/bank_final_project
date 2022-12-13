@@ -19,4 +19,9 @@ public class SavingsAccount extends Account {
         }
     }
 
+    @Override
+    public String toString() {
+        return "SavingsAccount:<br>" + this.getCurrencies().toString() + "<br>";
+    }
+
 }
