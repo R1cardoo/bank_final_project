@@ -6,3 +6,7 @@
 20221208,a1,saving,5.05,6000,Rupee,withdraw,
 20221208,a1,saving,5.05,6000,Rupee,withdraw,
 20221221,user5,Checking,4.66,23.1,CNY,deposit,
+20221216,user1,Savings,0.0,500.0,USD,deposit,
+20221216,user1,Savings,0.0,300.0,USD,withdraw,
+20221216,user1,Savings,0.0,200.0,USD,deposit,
+20221216,user1,Checking,0.0,300.0,USD,loan,

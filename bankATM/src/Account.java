@@ -60,6 +60,8 @@ public class Account {
         Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), type.getTypeOfAccount(),
                 TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"deposit");
         Admin.getInstance().getTransactionsList().add(myTransaction);
+        Admin.getInstance().saveTransaction(myTransaction);
+        CustomerHome.getCustomer().addTransaction(myTransaction);
 
         // TODO now only USD, can implement more later.
         double value = currencies.get(1).getValue();
@@ -84,6 +86,8 @@ public class Account {
             Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), type.getTypeOfAccount(),
                     TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"withdraw");
             Admin.getInstance().getTransactionsList().add(myTransaction);
+            Admin.getInstance().saveTransaction(myTransaction);
+            CustomerHome.getCustomer().addTransaction(myTransaction);
 
             currencies.get(1).setValue(curAmount - amount);
 

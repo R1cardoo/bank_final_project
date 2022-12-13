@@ -69,6 +69,9 @@ public class SecuritiesAccount extends Account {
                     Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
                             TimeHelper.getInstance().getTime(),0, totalPrice, CurrencyType.USD.toString(),"buyStock");
                     Admin.getInstance().getTransactionsList().add(myTransaction);
+                    Admin.getInstance().saveTransaction(myTransaction);
+                    CustomerHome.getCustomer().addTransaction(myTransaction);
+
                     getCurrencies().get(1).setValue(originalMoney - totalPrice);
                     // add stock to stockOwned
                     ArrayList<Double> mylist = new ArrayList<Double>();
@@ -97,6 +100,9 @@ public class SecuritiesAccount extends Account {
                     Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
                             TimeHelper.getInstance().getTime(),0, totalPrice, CurrencyType.USD.toString(),"sellStock");
                     Admin.getInstance().getTransactionsList().add(myTransaction);
+                    Admin.getInstance().saveTransaction(myTransaction);
+                    CustomerHome.getCustomer().addTransaction(myTransaction);
+
                     getCurrencies().get(1).setValue(originalMoney + totalPrice);
 
                     // deduct amount in stockOwned;

@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MakeTransactionPanel extends JPanel{
+    public static final String COMMAND_SELECT_ACCOUNT = "SelectAccount";
+    public static final String COMMAND_SELECT_TYPE = "SelectType";
+    public static final String COMMAND_SUBMIT = "Submit";
+
     public static final String CHECKING = "checkingAccount";
     public static final String SAVING = "savingAccount";
     public static final String SECURITY = "securityAccount";
@@ -32,20 +36,26 @@ public class MakeTransactionPanel extends JPanel{
 
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
+        addItemsToComboBox();
+        comboBox1.setActionCommand(COMMAND_SELECT_ACCOUNT);
         comboBox1.addActionListener(new MakeTransactionListener());
         panel1.add(comboBox1);
-
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel2.add(label2);
         panel2.add(comboBox2);
+        comboBox2.addActionListener(new MakeTransactionListener());
+        comboBox2.setActionCommand(COMMAND_SELECT_TYPE);
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(label3);
+        amount.setText("0");
         panel3.add(amount);
 
         JPanel panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         submitBtn.addActionListener(new MakeTransactionListener());
+        submitBtn.setActionCommand(COMMAND_SUBMIT);
+        submitBtn.setEnabled(false);
         panel4.add(submitBtn);
 
 
@@ -57,5 +67,19 @@ public class MakeTransactionPanel extends JPanel{
         vBox.add(panel4);
 
         add(vBox);
+    }
+
+    private void addItemsToComboBox() {
+        comboBox1.removeAllItems();
+        Customer customer = CustomerHome.getCustomer();
+        if (customer.getCheckAccount()!= null) {
+            comboBox1.addItem(CHECKING);
+        }
+        if (customer.getSaveAccount()!= null) {
+            comboBox1.addItem(SAVING);
+        }
+        if (customer.getSecuritiesAccount()!= null) {
+            comboBox1.addItem(SECURITY);
+        }
     }
 }
