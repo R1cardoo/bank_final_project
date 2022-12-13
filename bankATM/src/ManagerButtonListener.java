@@ -16,7 +16,7 @@ public class ManagerButtonListener implements ActionListener {
                 break;
             case ManagerHome.COMMAND_GET_CUSTOMER_INFO:  // get customer info
                 // ManagerHome.dismiss();
-                ManagerHome.frame.setContentPane(new AccountInfoPanel(ManagerHome.frame,ManagerHome.basePane, "TODO INFO"));
+                ManagerHome.frame.setContentPane(new ViewCustomerInfoPanel(ManagerHome.frame,ManagerHome.basePane, "TODO INFO"));
                 break;
             case ManagerHome.COMMAND_SHOW_STOCK_MARKET:    // show stock market info
                 // ManagerHome.dismiss();
