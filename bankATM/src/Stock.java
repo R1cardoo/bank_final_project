@@ -1,5 +1,3 @@
-import java.util.List;
-
 /**
  * class for representing type of stock
  */

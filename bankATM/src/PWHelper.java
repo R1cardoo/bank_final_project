@@ -1,4 +1,5 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 public class PWHelper {
     public static void registerSuccessful() {
         JOptionPane.showMessageDialog(
@@ -22,6 +23,24 @@ public class PWHelper {
         JOptionPane.showMessageDialog(
                 Login.frame,
                 "Login Successfully",
+                "Notice",
+                JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    public static void success(JFrame frame) {
+        JOptionPane.showMessageDialog(
+                frame,
+                "You did it Successfully!",
+                "Notice",
+                JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    public static void fail(JFrame frame) {
+        JOptionPane.showMessageDialog(
+                frame,
+                "You fail to do that due to some reasons!",
                 "Notice",
                 JOptionPane.WARNING_MESSAGE
         );

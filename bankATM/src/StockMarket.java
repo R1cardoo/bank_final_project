@@ -10,13 +10,14 @@ public class StockMarket {
         if (instance == null) {
             instance = new StockMarket();
             admin = Admin.getInstance();
+            allStocks = admin.loadStockInfo();
         }
         return instance;
     }
 
     private static Admin admin = null;
 
-    private static List<Stock> allStocks = admin.loadStockInfo();
+    private static List<Stock> allStocks = null;
 
 
 
@@ -52,15 +53,23 @@ public class StockMarket {
     public boolean removeStock(String stockName){
         Stock stock = admin.getStockByName(stockName);
         if (stock!=null) {
+            admin.delStock(stock);
             for (Stock stok: allStocks) {
                 if (stok.getStockName().equals(stockName)) {
                     allStocks.remove(stok);
+                    return true;
                 }
             }
-            admin.delStock(stock);
             return true;
         } else {
             return false;
         }
+    }
+
+    public Stock getStockByName(String stockName) {
+        for (Stock stok: allStocks) {
+            if (stok.getStockName().equals(stockName)) return stok;
+        }
+        return null;
     }
 }

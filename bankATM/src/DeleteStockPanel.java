@@ -28,6 +28,10 @@ public class DeleteStockPanel extends JPanel{
         panel1.add(label1);
         // TODO add elements
         panel1.add(comboBox);
+        comboBox.removeAllItems();
+        for (Stock stock: StockMarket.getInstance().getAvailableStocks()) {
+            comboBox.addItem(stock.getStockName());
+        }
         comboBox.setActionCommand(COMMAND_SELECT_COMBOBOX);
         comboBox.addActionListener(new DeleteStockButtonListener());
 
