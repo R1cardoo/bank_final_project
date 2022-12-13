@@ -55,4 +55,13 @@ public class PWHelper {
         );
     }
 
+    public static void newBusinessDay() {
+        JOptionPane.showMessageDialog(
+                ManagerHome.frame,
+                "Pay interest and Charge interest!",
+                "Notice",
+                JOptionPane.WARNING_MESSAGE
+        );
+    }
+
 }

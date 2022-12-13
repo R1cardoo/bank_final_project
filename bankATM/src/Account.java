@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * this class is to represent any type of Account
@@ -8,22 +7,34 @@ public class Account {
 
     private String username;
     private TypeOfAccount type;
-    private ArrayList<Currency> currencies;
+    private ArrayList<Currency> currencies = new ArrayList<Currency>(){};
 
-    public Account(String username, TypeOfAccount type, ArrayList<Currency> currencies) {
+    public Account(String username, TypeOfAccount type, ArrayList<Currency> currencies) { // load from CSV
         this.username = username;
         this.type = type;
         this.currencies = currencies;
     }
 
-    public Account() {
-
+    public Account(String username, TypeOfAccount type) { // initialize
+        this.username = username;
+        this.type = type;
+        currenciesInitialization();
     }
 
     public String getUsername() {
         return username;
     }
 
+    private void currenciesInitialization() {
+        Currency currency1 = new Currency(CurrencyType.USD, 0);
+        Currency currency2 = new Currency(CurrencyType.INR, 0);
+        Currency currency3 = new Currency(CurrencyType.CNY, 0);
+        Currency currency4 = new Currency(CurrencyType.GBP, 0);
+        currencies.add(currency1);
+        currencies.add(currency2);
+        currencies.add(currency3);
+        currencies.add(currency4);
+    }
 
     public TypeOfAccount getType() {
         return type;

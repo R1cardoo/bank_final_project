@@ -6,8 +6,12 @@ import java.util.List;
  */
 public class SavingsAccount extends Account {
 
-    public SavingsAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies) {
-        super(username, type, currencies);
+    public SavingsAccount(String username, ArrayList<Currency> currencies) {
+        super(username, TypeOfAccount.Savings, currencies);
+    }
+
+    public SavingsAccount(String username) {
+        super(username, TypeOfAccount.Savings);
     }
 
     public void addInterest() { //interest if the balance is high in the savings account

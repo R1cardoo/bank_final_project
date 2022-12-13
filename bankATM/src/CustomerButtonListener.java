@@ -17,7 +17,7 @@ public class CustomerButtonListener implements ActionListener {
                 CustomerHome.frame.setContentPane(new AccountInfoPanel(CustomerHome.frame, CustomerHome.basePane,CustomerHome.getCustomer().toString()));
                 break;
             case CustomerHome.COMMAND_SHOW_MARKET:
-                CustomerHome.frame.setContentPane(new StockMarketInfoPanel(CustomerHome.frame, CustomerHome.basePane,"TODO StockMarketInfo"));
+                CustomerHome.frame.setContentPane(new StockMarketInfoPanel(CustomerHome.frame, CustomerHome.basePane,StockMarket.getInstance().toString()));
                 break;
             case CustomerHome.COMMAND_VIEW_TRANSACTIONS:
                 CustomerHome.frame.setContentPane(new ViewTransactionPanel("TODO StockMarketInfo"));

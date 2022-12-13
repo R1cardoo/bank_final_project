@@ -16,7 +16,7 @@ public class ViewCustomerInfoButtonListener implements ActionListener {
         } else if (command.equals(ViewCustomerInfoPanel.COMMAND_SEARCH)) {
             String username = (String) ViewCustomerInfoPanel.comboBox.getSelectedItem();
             try {
-                String info= Manager.checkCustomer(username);
+                String info= "<html><body>" + Manager.checkCustomer(username) + "<body></html>";
                 ViewCustomerInfoPanel.label.setText(info);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);

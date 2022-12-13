@@ -19,8 +19,6 @@ public class StockMarket {
 
     private static List<Stock> allStocks = null;
 
-
-
     public List<Stock> getAvailableStocks(){
         allStocks = admin.loadStockInfo();
         return allStocks;
@@ -72,4 +70,6 @@ public class StockMarket {
         }
         return null;
     }
+
+//    public
 }

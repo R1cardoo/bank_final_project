@@ -475,7 +475,7 @@ interface to save and modify files
         ArrayList<Currency> currencies = getCurrencyList(personInfo, 2, 2);
         int afterIndex = 1 + 2 * CurrencyType.values().length;
         int loanAmount = Integer.parseInt(personInfo.get(++afterIndex));  //currency.type+1
-        return new CheckingAccount(username, TypeOfAccount.Checking, currencies, loanAmount);
+        return new CheckingAccount(username, currencies, loanAmount);
 
     }
 
@@ -488,7 +488,7 @@ interface to save and modify files
         //account type-->set enum
 
         ArrayList<Currency> currencies = getCurrencyList(personInfo, 2, 2);
-        return new SavingsAccount(username, TypeOfAccount.Savings, currencies);
+        return new SavingsAccount(username, currencies);
     }
 
 
@@ -519,7 +519,7 @@ interface to save and modify files
             stockOwned.put(stock, stockData);
             i += 3;
         }
-        return new SecuritiesAccount(username, TypeOfAccount.Securities, currencies, realizedProfit, unrealizedProfit, stockOwned);
+        return new SecuritiesAccount(username, currencies, realizedProfit, unrealizedProfit, stockOwned);
 
     }
 

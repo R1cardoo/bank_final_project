@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreateAccountPanel extends JPanel {
+    public static final String COMMAND_CREAT_CHECKING = "CreateChecking";
+    public static final String COMMAND_CREATE_SAVING = "CreateSaving";
+    public static final String COMMAND_CREATE_SECURITY = "CreateSecurity";
 
     public static JButton backBtn = new JButton("back");
     public static JButton createCheckingAccountBtn = new MyButton("Create Checking Account");
@@ -23,15 +26,18 @@ public class CreateAccountPanel extends JPanel {
 
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(createCheckingAccountBtn);
+        createCheckingAccountBtn.setActionCommand(COMMAND_CREAT_CHECKING);
         createCheckingAccountBtn.addActionListener(new CreateAccountListener());
 
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel2.add(createSavingAccountBtn);
-        createSavingAccountBtn.addActionListener(new CustomerButtonListener());
+        createSavingAccountBtn.setActionCommand(COMMAND_CREATE_SAVING);
+        createSavingAccountBtn.addActionListener(new CreateAccountListener());
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(createSecurityAccountBtn);
-        createSecurityAccountBtn.addActionListener(new CustomerButtonListener());
+        createSecurityAccountBtn.setActionCommand(COMMAND_CREATE_SECURITY);
+        createSecurityAccountBtn.addActionListener(new CreateAccountListener());
 
         Box vBox = Box.createVerticalBox();
         vBox.add(panel0);
