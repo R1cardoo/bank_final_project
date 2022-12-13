@@ -7,7 +7,7 @@ public class AdjustExchangeRatePanel extends JPanel{
 
     public static JButton backBtn = new JButton("back");
 
-    public String[] currencies = {"Pound", "RMB", "Rupee"};
+    public String[] currencies = {"CNY", "INR", "GBP"};
 
     public static JLabel label1 = new JLabel("currency: ");
 
@@ -31,6 +31,7 @@ public class AdjustExchangeRatePanel extends JPanel{
 
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
+        comboBox.removeAllItems();
         for (String cur : currencies) {
             comboBox.addItem(cur);
         }
@@ -44,6 +45,7 @@ public class AdjustExchangeRatePanel extends JPanel{
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(submit);
+        submit.setEnabled(false);
         submit.setActionCommand(COMMAND_SUBMIT);
         submit.addActionListener(new AdjustExchangeRateButtonListener());
 

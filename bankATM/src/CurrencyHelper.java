@@ -38,7 +38,7 @@ public class CurrencyHelper {
     }
 
     public double transferToDollar(String kind, double value){
-        return value*currencyConvert.get(kind);
+        return value*currencyConvert.get(CurrencyType.valueOf(kind));
     }
 
     //if our bank don't support a kind of currency anymore, call this func to delete it.
