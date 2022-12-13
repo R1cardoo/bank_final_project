@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class ViewCustomerInfoPanel extends JPanel {
     public static final String COMMAND_COMBO_BOX = "ComboBox";
@@ -26,7 +27,10 @@ public class ViewCustomerInfoPanel extends JPanel {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         comboBox.removeAllItems();
         // TODO comboBox add all user
-        comboBox.addItem("123");
+        List<Customer> customers = Admin.getInstance().loadAllCustomers();
+        for (Customer cus: customers) {
+            comboBox.addItem(cus.getUserName());
+        }
         panel1.add(comboBox);
         comboBox.setActionCommand(COMMAND_COMBO_BOX);
         comboBox.addActionListener(new ViewCustomerInfoButtonListener());
