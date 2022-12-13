@@ -5,14 +5,17 @@ import java.util.List;
  */
 public class Stock {
 
-    private final String stockName;
-    private final int stockId;
-    private final double stockPrice;
+    private String stockName;
+    private int stockId;
+    private double stockPrice;
 
     public Stock(String stockName, int stockId, double stockPrice) {
         this.stockName = stockName;
         this.stockId = stockId;
         this.stockPrice = stockPrice;
+    }
+
+    public Stock() {
     }
 
     public String getStockName() {
@@ -27,4 +30,8 @@ public class Stock {
         return stockPrice;
     }
 
+
+    public void setStockPrice(double stockPrice) {
+        this.stockPrice = stockPrice;
+    }
 }

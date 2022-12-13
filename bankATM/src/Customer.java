@@ -73,6 +73,15 @@ public class Customer extends User {
         this.securitiesAccount = securitiesAccount;
     }
 
+    public void saveCustomerInfo(){
+        Admin admin = new Admin();
+        admin.saveNameAndPSWD(this);
+        admin.saveChecking(this.checkingAccount);
+        admin.saveSaving(this.savingsAccount);
+        admin.saveSecurities(this.securitiesAccount);
+        transactionArrayList.forEach(admin::saveTransaction);
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Customer{");
