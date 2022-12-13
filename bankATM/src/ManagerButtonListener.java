@@ -16,7 +16,7 @@ public class ManagerButtonListener implements ActionListener {
                 break;
             case ManagerHome.COMMAND_GET_CUSTOMER_INFO:  // get customer info
                 // ManagerHome.dismiss();
-                ManagerHome.frame.setContentPane(new ViewCustomerInfoPanel(ManagerHome.frame,ManagerHome.basePane, "TODO INFO"));
+                ManagerHome.frame.setContentPane(new ViewCustomerInfoPanel(ManagerHome.frame,ManagerHome.basePane, "NULL"));
                 break;
             case ManagerHome.COMMAND_SHOW_STOCK_MARKET:    // show stock market info
                 // ManagerHome.dismiss();
@@ -36,7 +36,8 @@ public class ManagerButtonListener implements ActionListener {
                 ManagerHome.frame.setContentPane(new UpdateStockPanel());
                 break;
             case ManagerHome.COMMAND_NEW_BUSINESS_DAY:     // get to a new day. pay interests
-                // TODO pay depositInterest and get loanInterest
+                Manager.newDay();
+                PWHelper.newBusinessDay();
                 break;
         }
     }

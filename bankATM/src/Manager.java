@@ -43,7 +43,7 @@ public class Manager extends User {
         Admin admin = Admin.getInstance();
         for (Customer customer : admin.loadAllCustomers()) {
             if (customer.getUserName().equals(username)){
-                return customer.getCheckAccount().toString() + customer.getSaveAccount().toString() + customer.getSecuritiesAccount().toString();
+                return customer.toString();
             }
         }
         return "null";
