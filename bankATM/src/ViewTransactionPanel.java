@@ -19,7 +19,7 @@ public class ViewTransactionPanel extends JPanel{
         backBtn.addActionListener(new BackButtonListener(CustomerHome.frame, CustomerHome.basePane));
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        label.setText(transactionString);
+        label.setText("<html><body>" + transactionString + "<body></html>");
         panel.add(label);
 
         Box vBox = Box.createVerticalBox();

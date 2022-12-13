@@ -19,9 +19,12 @@ public class Customer extends User {
     private ArrayList<Transaction> transactionArrayList  = new ArrayList<>();
 
 
-
-    public ArrayList<Transaction> viewTransactions(){
-        return transactionArrayList;
+    public String getTransactionString() {
+        String ans = "Transactions: <br><br>";
+        for (Transaction transaction: transactionArrayList) {
+            ans += transaction.toString() + "<br><br>";
+        }
+        return ans;
     }
 
     public Customer(){
