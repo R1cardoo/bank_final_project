@@ -5,15 +5,15 @@ public class Customer extends User {
     /**
      *  SavingsAccount
      */
-    private SavingsAccount savingsAccount;
+    private SavingsAccount savingsAccount = null;
 
     /**
      * CheckAccount
      */
-    private CheckingAccount checkingAccount;
+    private CheckingAccount checkingAccount = null;
 
 
-    private SecuritiesAccount securitiesAccount;
+    private SecuritiesAccount securitiesAccount = null;
 
 
     private ArrayList<Transaction> transactionArrayList  = new ArrayList<>();

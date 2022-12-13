@@ -8,8 +8,12 @@ public class CheckingAccount extends Account {
 
     private double loanAmount = 0;
 
-    public CheckingAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double loanAmount) {
-        super(username, type, currencies);
+    public CheckingAccount(String username, ArrayList<Currency> currencies, double loanAmount) {
+        super(username, TypeOfAccount.Checking, currencies);
+        this.loanAmount = loanAmount;
+    }
+    public CheckingAccount(String username) {
+        super(username, TypeOfAccount.Checking);
         this.loanAmount = loanAmount;
     }
 

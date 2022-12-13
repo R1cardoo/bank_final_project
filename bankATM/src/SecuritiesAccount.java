@@ -12,12 +12,20 @@ public class SecuritiesAccount extends Account {
     //key:Stock,   value: buy price, count
     private HashMap<Stock,ArrayList<Double>> stockOwned;
 
-    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double realizedProfit, double unrealizedProfit, HashMap<Stock,ArrayList<Double>> stockOwned) {
-        super(username, type, currencies);
+    public SecuritiesAccount(String username, ArrayList<Currency> currencies, double realizedProfit, double unrealizedProfit, HashMap<Stock,ArrayList<Double>> stockOwned) {
+        super(username, TypeOfAccount.Securities, currencies);
         this.realizedProfit = realizedProfit;
         this.unrealizedProfit = unrealizedProfit;
         this.stockOwned = stockOwned;
     }
+
+    public SecuritiesAccount(String username) {
+        super(username, TypeOfAccount.Securities);
+        this.realizedProfit = 0;
+        this.unrealizedProfit = 0;
+        this.stockOwned = new HashMap<>();
+    }
+
 
 //need to add these methods: buyStocks() and sellStocks()
     //but these methods are related to the StockMarket class so need to work on that first?
