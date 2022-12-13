@@ -8,7 +8,7 @@ public class UpdateStockButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        String stockSelcted = (String) DeleteStockPanel.comboBox.getSelectedItem();
+        String stockSelcted = (String) UpdateStockPanel.comboBox.getSelectedItem();
         if (command.equals(UpdateStockPanel.COMMAND_SELECT_COMBOBOX)) {
             // TODO only when a stock is selected, change Button to valid and set value to textField
             if (stockSelcted != null) {
