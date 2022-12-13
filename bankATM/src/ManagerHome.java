@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ManagerHome {
-    public static final String COMMAND_LOG_OUT = "LogOut";
     public static final String COMMAND_GET_REPORT = "GetDailyReport";
     public static final String COMMAND_GET_CUSTOMER_INFO = "GetCustomerInfo";
     public static final String COMMAND_ADJUST_EXCHANGE_RATE = "AdjustExchangeRate";
