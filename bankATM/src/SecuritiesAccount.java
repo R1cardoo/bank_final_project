@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,11 +10,9 @@ public class SecuritiesAccount extends Account {
     private boolean enabled;
     private double realizedProfit;
     private double unrealizedProfit;
-    private List<Stock> stockOwned;
+    private HashMap<Stock,Integer> stockOwned;
 
-    private ArrayList<Integer> ownedNum;
-
-    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, List<Stock> stockOwned) {
+    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, boolean enabled, double realizedProfit, double unrealizedProfit, HashMap<Stock, Integer> stockOwned) {
         super(username, type, currencies);
         this.enabled = enabled;
         this.realizedProfit = realizedProfit;
@@ -21,7 +20,14 @@ public class SecuritiesAccount extends Account {
         this.stockOwned = stockOwned;
     }
 
-    //need to add these methods: buyStocks() and sellStocks()
+    public SecuritiesAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double realizedProfit, double unrealizedProfit, HashMap<Stock, Integer> stockOwned) {
+        super(username, type, currencies);
+        this.realizedProfit = realizedProfit;
+        this.unrealizedProfit = unrealizedProfit;
+        this.stockOwned = stockOwned;
+    }
+
+//need to add these methods: buyStocks() and sellStocks()
     //but these methods are related to the StockMarket class so need to work on that first?
 
     public double getRealizedProfit() {
