@@ -32,12 +32,12 @@ public class CreateAccountPanel extends JPanel {
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel2.add(createSavingAccountBtn);
         createSavingAccountBtn.setActionCommand(COMMAND_CREATE_SAVING);
-        createSavingAccountBtn.addActionListener(new CustomerButtonListener());
+        createSavingAccountBtn.addActionListener(new CreateAccountListener());
 
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel3.add(createSecurityAccountBtn);
         createSecurityAccountBtn.setActionCommand(COMMAND_CREATE_SECURITY);
-        createSecurityAccountBtn.addActionListener(new CustomerButtonListener());
+        createSecurityAccountBtn.addActionListener(new CreateAccountListener());
 
         Box vBox = Box.createVerticalBox();
         vBox.add(panel0);
