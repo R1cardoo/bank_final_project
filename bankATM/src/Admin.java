@@ -109,9 +109,7 @@ public class Admin {
         for (Map.Entry<String, ArrayList<String>> entry : userInfo.entrySet()) {
             ArrayList<String> person=entry.getValue();
             String passWord=person.get(0);
-            boolean isLogin= Boolean.parseBoolean(person.get(1));
-            double balance= Double.parseDouble(person.get(2));
-            Customer customer = new Customer(entry.getKey(),passWord,isLogin,balance);
+            Customer customer = new Customer(entry.getKey(),passWord);
             customers.add(customer);
         }
         for (Customer person: customers) {
@@ -259,7 +257,7 @@ public class Admin {
         initFileMap();
         for (Map.Entry<FilesName, String> entry : fileMap.entrySet()) {
             //file path for running in intellij IDEA
-            String dir = rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
+            String dir = rootDir1+File.separator+rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey().getFileName() + fileType;
 
             //file path for running in terminal
             // String dir = rootDir + File.separator +rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
@@ -275,20 +273,74 @@ public class Admin {
         }
     }
 
-    public boolean updateCheckingAccount(CheckingAccount checkingAccount) {
+    // TODO: 2022/12/12 updateInfo wrap up
+    public boolean updatePSWD(Customer customer){
+        //call this function when customer want to update their password
         ArrayList<String> data = new ArrayList<>();
-        data.add(checkingAccount.getUsername());
-        // data.add()
-
-        return updateInfo(checkingAccount.getUsername(), data, FilesName.CHECKING);
+        data.add(customer.getUserName());
+        data.add(customer.getPassWord());
+        return updateInfo(customer.getUserName(),data,FilesName.CUSTOMER);
     }
 
-    public boolean updateSavingsAccount(SavingsAccount savingsAccount) {
+    public boolean updateTransaction(Transaction transaction){
+        ArrayList<String> data = new ArrayList<>();
+        data.add(String.valueOf(transaction.getDate()));
+        data.add(transaction.getUserName());
+        data.add(transaction.getAccountType());
+        data.add(String.valueOf(transaction.getFeeCharged()));
+        data.add(String.valueOf(transaction.getAmount()));
+        data.add(transaction.getCurrency());
+        data.add(transaction.getTransactionType());
+        return updateInfo(transaction.getUserName(),data,FilesName.TRANSACTION);
+    }
+
+    public boolean updateSecurities(SecuritiesAccount securitiesAccount){
+        ArrayList<String> data = new ArrayList<>();
+        data.add(securitiesAccount.getUsername());
+        data.add(TypeOfAccount.Securities.getTypeOfAccount());
+        for (Currency currency: securitiesAccount.getCurrencies()) {
+            data.add(String.valueOf(currency.getType()));
+            data.add(String.valueOf(currency.getValue()));
+        }
+        data.add(String.valueOf(securitiesAccount.getRealizedProfit()));
+        data.add(String.valueOf(securitiesAccount.getUnrealizedProfit()));
+        for (Map.Entry<Stock,ArrayList<Double>> entry:securitiesAccount.getStockOwned().entrySet()) {
+            data.add(entry.getKey().getStockName());
+            data.add(String.valueOf(entry.getValue().get(0)));
+            data.add(String.valueOf(entry.getValue().get(1)));
+        }
+        return updateInfo(securitiesAccount.getUsername(),data,FilesName.SECURITIES);
+    }
+
+    public boolean updateSaving(SavingsAccount savingsAccount){
         ArrayList<String> data = new ArrayList<>();
         data.add(savingsAccount.getUsername());
-        // data.add()
+        data.add(TypeOfAccount.Savings.getTypeOfAccount());
+        for (Currency currency: savingsAccount.getCurrencies()) {
+            data.add(String.valueOf(currency.getType()));
+            data.add(String.valueOf(currency.getValue()));
+        }
+        return updateInfo(savingsAccount.getUsername(),data,FilesName.SAVING);
+    }
 
-        return updateInfo(savingsAccount.getUsername(), data, FilesName.CHECKING);
+    public boolean updateChecking(CheckingAccount checkingAccount){
+        ArrayList<String> data = new ArrayList<>();
+        data.add(checkingAccount.getUsername());
+        data.add(TypeOfAccount.Checking.getTypeOfAccount());
+        for (Currency currency: checkingAccount.getCurrencies()) {
+            data.add(String.valueOf(currency.getType()));
+            data.add(String.valueOf(currency.getValue()));
+        }
+        data.add(String.valueOf(checkingAccount.getLoanAmount()));
+        return updateInfo(checkingAccount.getUsername(),data,FilesName.CHECKING);
+    }
+
+    public boolean updateStock(Stock stock){
+        ArrayList<String> data = new ArrayList<>();
+        data.add(stock.getStockName());
+        data.add(String.valueOf(stock.getStockId()));
+        data.add(String.valueOf(stock.getStockPrice()));
+        return updateInfo(stock.getStockName(),data,FilesName.STOCK);
     }
 
     public CheckingAccount getCheckingByName(FilesName filesName,String name){
@@ -299,8 +351,8 @@ public class Admin {
         String username=personInfo.get(0);
         //account type--> TypeOfAccount.Checking
 
-        ArrayList<Currency> currencies=getCurrencyList(personInfo,3,2);
-        int afterIndex=2+2*CurrencyType.values().length;
+        ArrayList<Currency> currencies=getCurrencyList(personInfo,2,2);
+        int afterIndex=1+2*CurrencyType.values().length;
         int loanAmount= Integer.parseInt(personInfo.get(++afterIndex));  //currency.type+1
         return  new CheckingAccount(username, TypeOfAccount.Checking, currencies,loanAmount);
 
@@ -314,7 +366,7 @@ public class Admin {
 
         //account type-->set enum
 
-        ArrayList<Currency> currencies=getCurrencyList(personInfo,3,2);
+        ArrayList<Currency> currencies=getCurrencyList(personInfo,2,2);
         return new SavingsAccount(username,TypeOfAccount.Savings,currencies);
     }
 
@@ -329,18 +381,24 @@ public class Admin {
 
         //account type-->set enum
 
-        ArrayList<Currency> currencies=getCurrencyList(personInfo,3,2);
-        int afterIndex=2+2*CurrencyType.values().length;
-        boolean enabled= Boolean.parseBoolean(personInfo.get(++afterIndex));  //currency.type+1
-        double realizedProfit= Double.parseDouble(personInfo.get(++afterIndex));
+        ArrayList<Currency> currencies=getCurrencyList(personInfo,2,2);
+        int afterIndex=1+2*CurrencyType.values().length;
+        double realizedProfit= Double.parseDouble(personInfo.get(++afterIndex));//currency type+1
         double unrealizedProfit= Double.parseDouble(personInfo.get(++afterIndex));
         //csv file stores stock name
-        List<Stock> stockOwned=new ArrayList<>();
-        for(int i=++afterIndex;i<personInfo.size();i++){
+        // TODO: 2022/12/12 need check
+        HashMap<Stock,ArrayList<Double>> stockOwned=new HashMap<>();
+        for (int i = ++afterIndex; i+2 <personInfo.size() ;) {
+            ArrayList<Double> stockData=new ArrayList<>();
             Stock stock=getStockByName(personInfo.get(i));
-            stockOwned.add(stock);
+            double buyPrice=Double.parseDouble(personInfo.get(i+1));
+            double count=Double.parseDouble(personInfo.get(i+2));
+            stockData.add(buyPrice);
+            stockData.add(count);
+            stockOwned.put(stock,stockData);
+            i+=3;
         }
-        return new SecuritiesAccount(username, TypeOfAccount.Securities,currencies,enabled,realizedProfit,unrealizedProfit,stockOwned);
+        return new SecuritiesAccount(username, TypeOfAccount.Securities,currencies,realizedProfit,unrealizedProfit,stockOwned);
 
     }
 
@@ -354,7 +412,7 @@ public class Admin {
             }else{
                 value=0.0;
             }
-            // TODO: 2022/12/10 Check  CurrencyType.valueOf
+            // checkedTODO: 2022/12/10 Check  CurrencyType.valueOf
             Currency currency=new Currency(CurrencyType.valueOf(kind),value);
             currencies.add(currency);
             i+=gap;
@@ -382,11 +440,6 @@ public class Admin {
             String stockName=row.get(0);
             int stockId=Integer.parseInt(row.get(1));
             double stockPrice=Double.parseDouble(row.get(2));
-            boolean enabled=Boolean.parseBoolean(row.get(3));
-            List<Double> historyPrice=new ArrayList<>();
-            for(int i=4;i<row.size();i++){
-                historyPrice.add(Double.valueOf(row.get(i)));
-            }
             Stock stock=new Stock(stockName,stockId,stockPrice);
             stocksArray.add(stock);
         }
@@ -457,6 +510,5 @@ public class Admin {
     public List<Transaction> getTransactionsList() {
         return transactionsList;
     }
-
 }
 
