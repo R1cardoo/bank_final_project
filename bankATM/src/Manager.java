@@ -90,7 +90,7 @@ public class Manager extends User {
      * @return
      */
     public static void chargeInterest(Customer customer) {
-        customer.getCheckAccount().chargeLoanInterest();
+        customer.getCheckAccount().chargeLoanInterest( customer);
     }
 
 }

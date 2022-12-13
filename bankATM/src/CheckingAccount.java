@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * this class represents a checking account, which is a type of bank account
@@ -38,9 +37,9 @@ public class CheckingAccount extends Account {
         Admin.getInstance().updateChecking((CheckingAccount) this);
     }
 
-    public void chargeLoanInterest() {
+    public void chargeLoanInterest(Customer customer) {
         double amount = loanAmount * Constants.getLoanInterestPercentage();
-        Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
+        Transaction myTransaction = new Transaction(customer.getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
                 TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"loanInterest");
         Admin.getInstance().getTransactionsList().add(myTransaction);
 
