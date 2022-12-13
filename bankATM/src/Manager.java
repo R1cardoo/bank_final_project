@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 public class Manager extends User {
 
@@ -92,16 +93,18 @@ public class Manager extends User {
 
     }
 
-    public static void addStock(){
-
+    public static void addStock(String stockName,double stockPrice){
+        Random random = new Random();
+        int id = random.nextInt();
+        StockMarket.addStock(stockName, id, stockPrice);
     }
 
-    public static void deleteStock(){
-
+    public static void deleteStock(String stockName){
+        StockMarket.removeStock(stockName);
     }
 
-    public static void updateStockPrice(){
-
+    public static void updateStockPrice(String stockName,double stockPrice){
+        StockMarket.updateStock(stockName,stockPrice);
     }
 
     /**
