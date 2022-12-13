@@ -387,7 +387,7 @@ public class Admin {
             for(int i=4;i<row.size();i++){
                 historyPrice.add(Double.valueOf(row.get(i)));
             }
-            Stock stock=new Stock(stockName,stockId,stockPrice,enabled,historyPrice);
+            Stock stock=new Stock(stockName,stockId,stockPrice);
             stocksArray.add(stock);
         }
         return stocksArray;

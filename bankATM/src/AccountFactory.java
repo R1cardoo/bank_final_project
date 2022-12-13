@@ -4,7 +4,6 @@ public class AccountFactory { //confirm this because I'm not sure about this
         Account account = new Account();
         account.setUsername(account.getUsername());
         account.setType(account.getType());
-        account.setBalance(account.getBalance());
         account.setCurrencies(account.getCurrencies());
         return account;
     }

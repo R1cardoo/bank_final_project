@@ -11,13 +11,13 @@ public class SavingsAccount extends Account {
     }
 
     public void addInterest() { //interest if the balance is high in the savings account
-        if (this.getBalance() > Constants.getMinimumSavingsAccountBalanceForSecurities()) {
-            double balance = this.getBalance() + (this.getBalance() * Constants.getSavingsAccountInterestPercentage());
-            this.setBalance(balance);
-            // directly update the
-
-
-        }
+//        if (this.getBalance() > Constants.getMinimumSavingsAccountBalanceForSecurities()) {
+//            double balance = this.getBalance() + (this.getBalance() * Constants.getSavingsAccountInterestPercentage());
+//            this.setBalance(balance);
+//            // directly update the
+//
+//
+//        }
     }
 
 }

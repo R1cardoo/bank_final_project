@@ -29,7 +29,7 @@ public class Account {
         return type;
     }
 
-    public List<Currency> getCurrencies() {
+    public ArrayList<Currency> getCurrencies() {
         return currencies;
     }
 
