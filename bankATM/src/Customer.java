@@ -37,11 +37,6 @@ public class Customer extends User {
         super(userName,password);
     }
 
-    public Customer(String userName, String passWord, boolean isLogin, double balance) {
-        super(userName, passWord,isLogin);
-        this.balance = balance;
-    }
-
     public double getBalance() {
         return balance;
     }
