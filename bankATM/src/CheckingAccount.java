@@ -21,4 +21,27 @@ public class CheckingAccount extends Account {
         this.loanAmount = loanAmount;
     }
 
+    public void requestLoan(double amount) {
+        Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
+                TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"loan");
+        Admin.getInstance().getTransactionsList().add(myTransaction);
+
+
+        loanAmount +=amount;
+        double value = this.getCurrencies().get(1).getValue();
+        this.getCurrencies().get(1).setValue(value + amount);
+
+        Admin.getInstance().updateChecking((CheckingAccount) this);
+    }
+
+    public void chargeLoanInterest() {
+        double amount = loanAmount * Constants.getLoanInterestPercentage();
+        Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
+                TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"loanInterest");
+        Admin.getInstance().getTransactionsList().add(myTransaction);
+
+        loanAmount += amount;
+        Admin.getInstance().updateChecking(this);
+    }
+
 }

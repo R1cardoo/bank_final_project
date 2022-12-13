@@ -45,14 +45,50 @@ public class Account {
         this.type = type;
     }
 
+    public void depositMoney(double amount) {
+        Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), type.getTypeOfAccount(),
+                TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"deposit");
+        Admin.getInstance().getTransactionsList().add(myTransaction);
 
-    public void withdrawMoney(double amount) {
-//        if (balance > amount) { //withdraw only if current balance is more than amount that needs to be withdrawn
-//            this.balance -= amount;
-//        }
-//        else {
-//            System.out.println("Not enough balance"); //show not enough balance in GUI
-//        }
+        // TODO now only USD, can implement more later.
+        double value = currencies.get(1).getValue();
+        currencies.get(1).setValue(value);
+
+        if (this.getClass().equals(CheckingAccount.class)) {
+            Admin.getInstance().updateChecking((CheckingAccount) this);
+        } else if (this.getClass().equals(SavingsAccount.class)) {
+            Admin.getInstance().updateSaving((SavingsAccount) this);
+        } else if (this.getClass().equals(SecuritiesAccount.class)) {
+            Admin.getInstance().updateSecurities((SecuritiesAccount) this);
+        }
+    }
+
+
+    public boolean withdrawMoney(double amount) {
+        double curAmount = currencies.get(1).getValue();
+        if (curAmount < amount) {
+            System.out.println("Not enough balance"); //show not enough balance in GUI
+            return false;
+        } else { //withdraw only if current balance is more than amount that needs to be withdrawn
+            Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), type.getTypeOfAccount(),
+                    TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"withdraw");
+            Admin.getInstance().getTransactionsList().add(myTransaction);
+
+            currencies.get(1).setValue(curAmount - amount);
+
+            if (this.getClass().equals(CheckingAccount.class)) {
+                Admin.getInstance().updateChecking((CheckingAccount) this);
+            } else if (this.getClass().equals(SavingsAccount.class)) {
+                Admin.getInstance().updateSaving((SavingsAccount) this);
+            } else if (this.getClass().equals(SecuritiesAccount.class)) {
+                Admin.getInstance().updateSecurities((SecuritiesAccount) this);
+            }
+            return true;
+        }
+    }
+
+    public void setUSD(double amount) {
+        currencies.get(1).setValue(amount);
     }
 
 }

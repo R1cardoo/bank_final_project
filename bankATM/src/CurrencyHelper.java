@@ -9,6 +9,15 @@ import java.util.HashMap;
 //this class is designed for converting value for different kinds of currency
 //manager can update the latest exchange rate
 public class CurrencyHelper {
+
+    private static CurrencyHelper instance = null;
+
+    public static CurrencyHelper getInstance() {
+        if (instance == null) {
+            instance = new CurrencyHelper();
+        }
+        return instance;
+    }
     // Our exchange rates are calculated using foreign currency to US dollar exchange rates.
     private HashMap<CurrencyType, Double> currencyConvert;
 
