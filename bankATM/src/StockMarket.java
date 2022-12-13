@@ -4,8 +4,17 @@ import java.util.List;
 
 public class StockMarket {
 
+    private static StockMarket instance = null;
 
-    private static Admin admin = new Admin();
+    public static StockMarket getInstance() {
+        if (instance == null) {
+            instance = new StockMarket();
+            admin = Admin.getInstance();
+        }
+        return instance;
+    }
+
+    private static Admin admin = null;
 
     private static List<Stock> allStocks = admin.loadStockInfo();
 
@@ -17,35 +26,41 @@ public class StockMarket {
     }
 
 
-    public static boolean updateStock(String stockName,double newPrice){
-        Stock stock;
-        if ((stock = admin.getStockByName(stockName))!=null){
+    public boolean updateStock(String stockName, double newPrice){
+        Stock stock = admin.getStockByName(stockName);
+        if (stock != null){
             stock.setStockPrice(newPrice);
             admin.updateStock(stock);
+            for (Stock stok: allStocks) {
+                if (stok.getStockName().equals(stockName)) {
+                    stok.setStockPrice(newPrice);
+                }
+            }
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public static boolean addStock(String stockName, int stockId, double stockPrice){
+    public boolean addStock(String stockName, int stockId, double stockPrice){
         Stock stock = new Stock(stockName, stockId, stockPrice);
         allStocks.add(stock);
         admin.saveStock(stock);
         return true;
     }
 
-    public static boolean removeStock(String stockName){
-        Stock stock;
-        if ((stock = admin.getStockByName(stockName))!=null){
-            allStocks.remove(stock);
+    public boolean removeStock(String stockName){
+        Stock stock = admin.getStockByName(stockName);
+        if (stock!=null) {
+            for (Stock stok: allStocks) {
+                if (stok.getStockName().equals(stockName)) {
+                    allStocks.remove(stok);
+                }
+            }
             admin.delStock(stock);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
-
-
-
 }

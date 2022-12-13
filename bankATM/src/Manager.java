@@ -30,7 +30,9 @@ public class Manager extends User {
         List<Customer> customers = admin.loadAllCustomers();
         double count = 0;
         for (Customer customer : customers) {
-            count += customer.getBalance();
+            count += customer.getCheckAccount().getCurrencies().get(1).getValue() +
+                    customer.getSaveAccount().getCurrencies().get(1).getValue() +
+                    customer.getSecuritiesAccount().getCurrencies().get(1).getValue();
         }
         return String.valueOf(count);
     }
@@ -41,22 +43,25 @@ public class Manager extends User {
         Admin admin = Admin.getInstance();
         for (Customer customer : admin.loadAllCustomers()) {
             if (customer.getUserName().equals(username)){
-                return "balance:"+customer.getBalance()+"\n\n";
+                return customer.getCheckAccount().toString() + customer.getSaveAccount().toString() + customer.getSecuritiesAccount().toString();
             }
         }
-        return "";
+        return "null";
     }
 
     /**
      * charge fee
      */
     public static void chargeFee(Customer customer, double fee,String type) {
-        if (customer.getBalance() <= 0) {
+        double originalAmount = customer.getCheckAccount().getCurrencies().get(1).getValue();
+
+        if (originalAmount - fee < 0) {
             System.err.println("fail to charge fee, not enough balance");
         } else {
-            customer.setBalance(customer.getBalance() - fee);
-            Transaction transaction = TransactionFactory.createTransaction(customer, fee, TimeHelper.getInstance().getTime(), type);
+            Transaction transaction = TransactionFactory.createTransaction(customer, fee, TimeHelper.getInstance().getTime(), "fee");
             customer.addTransaction(transaction);
+            customer.getCheckAccount().getCurrencies().get(1).setValue(originalAmount - fee);
+            Admin.getInstance().updateChecking(customer.getCheckAccount());
         }
 
     }
@@ -76,12 +81,7 @@ public class Manager extends User {
      * @return
      */
     public static void payInterest(Customer customer) {
-        if (customer.getBalance() > 5000){
-            double value = customer.getBalance() * interestRate;
-            customer.setBalance(customer.getBalance()+value);
-            Transaction transaction = TransactionFactory.createTransaction(customer, value,TimeHelper.getInstance().getTime(), "depositInterest");
-            customer.addTransaction(transaction);
-        }
+        customer.getSaveAccount().addInterest();
     }
 
     /**
@@ -90,21 +90,21 @@ public class Manager extends User {
      * @return
      */
     public static void chargeInterest(Customer customer) {
-
+        customer.getCheckAccount().chargeLoanInterest();
     }
 
     public static void addStock(String stockName,double stockPrice){
         Random random = new Random();
         int id = random.nextInt();
-        StockMarket.addStock(stockName, id, stockPrice);
+        StockMarket.getInstance().addStock(stockName, id, stockPrice);
     }
 
     public static void deleteStock(String stockName){
-        StockMarket.removeStock(stockName);
+        StockMarket.getInstance().removeStock(stockName);
     }
 
     public static void updateStockPrice(String stockName,double stockPrice){
-        StockMarket.updateStock(stockName,stockPrice);
+        StockMarket.getInstance().updateStock(stockName,stockPrice);
     }
 
     /**

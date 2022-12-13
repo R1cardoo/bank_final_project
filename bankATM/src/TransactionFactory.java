@@ -5,8 +5,8 @@ public class TransactionFactory {
         Transaction transaction = new Transaction();
         transaction.setUserName("userName");
         transaction.setAccountType("accountType");
-        transaction.setFeeCharged(fee);
-        transaction.setAmount(customer.getBalance());
+        transaction.setFeeCharged(0);
+        transaction.setAmount(fee);
         transaction.setDate(date);
         transaction.setTransactionType(transType);
         return transaction;

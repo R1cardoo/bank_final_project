@@ -54,4 +54,72 @@ public class SecuritiesAccount extends Account {
     public void setStockOwned(HashMap<Stock, ArrayList<Double>> stockOwned) {
         this.stockOwned = stockOwned;
     }
+
+    public boolean buyStock(String stockName, double amount) {
+        List<Stock> stockList = StockMarket.getInstance().getAvailableStocks();
+        for (Stock stock : stockList) {
+            if (stock.getStockName().equals(stockName)) {
+                double unitPrice = stock.getStockPrice();
+                double totalPrice = unitPrice * amount;
+                double originalMoney = getCurrencies().get(1).getValue();
+                if (totalPrice < originalMoney) {
+                    System.out.println("No enough money to buy!");
+                    return false;
+                } else {
+                    // deduct money in securitiesAccount
+                    Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
+                            TimeHelper.getInstance().getTime(),0, totalPrice, CurrencyType.USD.toString(),"buyStock");
+                    Admin.getInstance().getTransactionsList().add(myTransaction);
+                    getCurrencies().get(1).setValue(originalMoney - totalPrice);
+                    // add stock to stockOwned
+                    ArrayList<Double> mylist = new ArrayList<Double>();
+                    mylist.add(unitPrice);
+                    mylist.add(amount);
+                    stockOwned.put(stock, mylist);
+                    Admin.getInstance().updateSecurities(this);
+                    return true;
+                }
+            }
+        }
+        System.out.println("No such stock");
+        return false;
+    }
+
+    public boolean sellStock(String stockName, double amount) {
+        for (Stock stock : stockOwned.keySet()) {
+            if (stock.getStockName().equals(stockName)) {
+                double unitPrice = stock.getStockPrice();
+                double totalPrice = unitPrice * amount;
+                double originalMoney = getCurrencies().get(1).getValue();
+                if (amount > 0 ) {
+                    amount = Math.min(amount, stockOwned.get(stock).get(1));
+
+                    // add money in securitiesAccount
+                    Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
+                            TimeHelper.getInstance().getTime(),0, totalPrice, CurrencyType.USD.toString(),"sellStock");
+                    Admin.getInstance().getTransactionsList().add(myTransaction);
+                    getCurrencies().get(1).setValue(originalMoney + totalPrice);
+
+                    // deduct amount in stockOwned;
+                    double profit = totalPrice - amount * stockOwned.get(stock).get(0);
+                    unrealizedProfit -= profit;
+                    realizedProfit += profit;
+
+                    if ((stockOwned.get(stock).get(1) - amount) > 0 ) { // if anything left, just deduct amount
+                        stockOwned.get(stock).set(1, (stockOwned.get(stock).get(1) - amount));
+                    } else { // if nothing left, delete the entire record
+                        stockOwned.remove(stock);
+                    }
+
+                    Admin.getInstance().updateSecurities(this);
+                    return true;
+                } else {
+                    System.out.println("Amount should be more than 1");
+                    return false;
+                }
+            }
+        }
+        System.out.println("No such stock");
+        return false;
+    }
 }

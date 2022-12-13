@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class CheckingAccount extends Account {
 
-    private double loanAmount;
+    private double loanAmount = 0;
 
     public CheckingAccount(String username, TypeOfAccount type, ArrayList<Currency> currencies, double loanAmount) {
         super(username, type, currencies);

@@ -3,11 +3,6 @@ import java.util.ArrayList;
 public class Customer extends User {
 
     /**
-     * balance
-     */
-    private double balance;
-
-    /**
      *  SavingsAccount
      */
     private SavingsAccount savingsAccount;
@@ -35,14 +30,6 @@ public class Customer extends User {
 
     public Customer(String userName,String password){
         super(userName,password);
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public void addTransaction(Transaction transaction) {
@@ -85,7 +72,10 @@ public class Customer extends User {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Customer{");
-        sb.append("balance=").append(balance);
+        sb.append("balance=")
+                .append(this.checkingAccount.toString()).append("\n")
+                .append(this.savingsAccount.toString()).append("\n")
+                .append(this.securitiesAccount.toString()).append("\n");
         sb.append(", transactionArrayList=").append(transactionArrayList);
         sb.append('}');
         return sb.toString();
