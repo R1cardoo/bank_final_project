@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class Transaction implements Serializable {
     /**
@@ -22,7 +21,7 @@ public class Transaction implements Serializable {
      */
     double amount;
     /**
-     * currency
+     * currency type
      */
     String currency;
 
