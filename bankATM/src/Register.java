@@ -35,7 +35,7 @@ public class Register {
     }
 
     public void initFrame() {
-        ButtonListener buttonListener = new ButtonListener();
+        LoginAndRegisterButtonListener loginAndRegisterButtonListener = new LoginAndRegisterButtonListener();
         JPanel panel1 = new JPanel();
         panel1.add(Login.label1);
         panel1.add(Login.username);
@@ -53,9 +53,9 @@ public class Register {
         panel4.add(backBtn);
         if (!initialized) {
             registerbtn.setActionCommand(COMMAND_REGISTER);
-            registerbtn.addActionListener(buttonListener);
+            registerbtn.addActionListener(loginAndRegisterButtonListener);
             backBtn.setActionCommand(COMMAND_BACK);
-            backBtn.addActionListener(buttonListener);
+            backBtn.addActionListener(loginAndRegisterButtonListener);
             initialized = true;
         }
 

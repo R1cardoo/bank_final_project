@@ -25,7 +25,7 @@ public class Login {
     }
 
     private void initFrame() {
-        ButtonListener buttonListener = new ButtonListener();
+        LoginAndRegisterButtonListener loginAndRegisterButtonListener = new LoginAndRegisterButtonListener();
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panel1.add(label1);
         panel1.add(username);
@@ -37,11 +37,11 @@ public class Login {
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         if (!initialized) {
             Signinbtn.setActionCommand(COMMAND_SIGNIN);
-            Signinbtn.addActionListener(buttonListener);
+            Signinbtn.addActionListener(loginAndRegisterButtonListener);
             registerbtn.setActionCommand(COMMAND_REGISTER);
-            registerbtn.addActionListener(buttonListener);
+            registerbtn.addActionListener(loginAndRegisterButtonListener);
             resetbtn.setActionCommand(COMMAND_RESET);
-            resetbtn.addActionListener(buttonListener);
+            resetbtn.addActionListener(loginAndRegisterButtonListener);
             initialized = true;
         }
 
