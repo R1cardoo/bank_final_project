@@ -32,4 +32,9 @@ public class Stock {
     public void setStockPrice(double stockPrice) {
         this.stockPrice = stockPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + stockName + ",    Stock Price: " + stockPrice + "<br>";
+    }
 }

@@ -8,7 +8,7 @@ public class ManagerButtonListener implements ActionListener {
         switch (command) {
             case ManagerHome.COMMAND_GET_REPORT: // get daily report
                 // ManagerHome.dismiss();
-                ManagerHome.frame.setContentPane(new ViewDailyReportPanel("TODO the report"));
+                ManagerHome.frame.setContentPane(new ViewDailyReportPanel(Manager.getDailyReport()));
                 break;
             case ManagerHome.COMMAND_ADJUST_EXCHANGE_RATE: // adjust exchange rate
                 // ManagerHome.dismiss();
@@ -20,7 +20,7 @@ public class ManagerButtonListener implements ActionListener {
                 break;
             case ManagerHome.COMMAND_SHOW_STOCK_MARKET:    // show stock market info
                 // ManagerHome.dismiss();
-                ManagerHome.frame.setContentPane(new StockMarketInfoPanel(ManagerHome.frame, ManagerHome.basePane,"TODO stock info"));
+                ManagerHome.frame.setContentPane(new StockMarketInfoPanel(ManagerHome.frame, ManagerHome.basePane,StockMarket.getInstance().toString()));
                 break;
             case ManagerHome.COMMAND_ADD_STOCK:     // add a stock to stock market
                 // ManagerHome.dismiss();

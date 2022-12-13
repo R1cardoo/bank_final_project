@@ -25,7 +25,7 @@ public class Manager extends User {
      * @throws IOException
      * @throws ParseException
      */
-    public String getDailyReport(){
+    public static String getDailyReport(){
         Admin admin = Admin.getInstance();
         List<Customer> customers = admin.loadAllCustomers();
         double count = 0;
@@ -93,24 +93,4 @@ public class Manager extends User {
         customer.getCheckAccount().chargeLoanInterest();
     }
 
-    public static void addStock(String stockName,double stockPrice){
-        Random random = new Random();
-        int id = random.nextInt();
-        StockMarket.getInstance().addStock(stockName, id, stockPrice);
-    }
-
-    public static void deleteStock(String stockName){
-        StockMarket.getInstance().removeStock(stockName);
-    }
-
-    public static void updateStockPrice(String stockName,double stockPrice){
-        StockMarket.getInstance().updateStock(stockName,stockPrice);
-    }
-
-    /**
-     * change exchange rate
-     */
-    public static void changeExchangeRate() {
-
-    }
 }

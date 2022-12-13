@@ -71,5 +71,13 @@ public class StockMarket {
         return null;
     }
 
-//    public
+    @Override
+    public String toString() {
+        StringBuilder ans = new StringBuilder("All Stocks: <br><br>");
+        for (Stock stock: allStocks) {
+            ans.append(stock.toString());
+        }
+        return ans.toString();
+    }
+
 }

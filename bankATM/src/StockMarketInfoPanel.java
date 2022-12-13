@@ -17,7 +17,7 @@ public class StockMarketInfoPanel extends JPanel{
         backBtn.addActionListener(new BackButtonListener(frame, basePane));
 
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        label.setText(stockMarketInfo);
+        label.setText("<html><body>" + stockMarketInfo + "<body></html>");
         panel1.add(label);
 
         Box vBox = Box.createVerticalBox();
