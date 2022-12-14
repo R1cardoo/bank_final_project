@@ -259,10 +259,9 @@ public class Admin {
         for (Map.Entry<FilesName, String> entry : fileMap.entrySet()) {
             //file path for running in intellij IDEA
             //cqin and Carson running path
-            //
-            // String dir = rootDir1 + File.separator + rootDir2 + File.separator + rootDir3 + File.separator + entry.getKey().getFileName() + fileType;
+             String dir = rootDir1 + File.separator + rootDir2 + File.separator + rootDir3 + File.separator + entry.getKey().getFileName() + fileType;
             //R Li running path
-            String dir =rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey().getFileName() + fileType;
+            //String dir =rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey().getFileName() + fileType;
             //file path for running in terminal
             // String dir = rootDir + File.separator +rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
             File f = new File(dir);
@@ -356,7 +355,7 @@ interface to save and modify files
     }
 
 
-    // doneTODO: 2022/12/12 updateInfo wrap up
+    // TODO: 2022/12/12 updateInfo wrap up
     public boolean updatePSWD(Customer customer) {
         //call this function when customer want to update their password
         ArrayList<String> data = new ArrayList<>();
@@ -364,6 +363,19 @@ interface to save and modify files
         data.add(customer.getPassWord());
         return updateInfo(customer.getUserName(), data, FilesName.CUSTOMER);
     }
+
+    public boolean updateTransaction(Transaction transaction) {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(String.valueOf(transaction.getDate()));
+        data.add(transaction.getUserName());
+        data.add(transaction.getAccountType());
+        data.add(String.valueOf(transaction.getFeeCharged()));
+        data.add(String.valueOf(transaction.getAmount()));
+        data.add(transaction.getCurrency());
+        data.add(transaction.getTransactionType());
+        return updateInfo(transaction.getUserName(), data, FilesName.TRANSACTION);
+    }
+
     public boolean updateSecurities(SecuritiesAccount securitiesAccount) {
         ArrayList<String> data = new ArrayList<>();
         data.add(securitiesAccount.getUsername());
