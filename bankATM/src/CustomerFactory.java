@@ -17,6 +17,13 @@ public class CustomerFactory {
 
     public static Customer createCustomer(String userName,String passWord) {
         return new Customer(userName,passWord);
+    }
 
+
+    public static Customer registerCustomer(String userName,String passWord) {
+        Customer customer = new Customer(userName, passWord);
+        Admin admin = new Admin();
+        admin.saveNameAndPSWD(customer);
+        return customer;
     }
 }

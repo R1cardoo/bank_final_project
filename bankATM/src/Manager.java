@@ -28,13 +28,22 @@ public class Manager extends User {
     public static String getDailyReport(){
         Admin admin = Admin.getInstance();
         List<Customer> customers = admin.loadAllCustomers();
-        double count = 0;
+        double checkAccount = 0;
+        double saveAccount = 0;
+        double securitiesAccount = 0;
+        StringBuffer sb = new StringBuffer();
         for (Customer customer : customers) {
-            count += customer.getCheckAccount().getCurrencies().get(1).getValue() +
-                    customer.getSaveAccount().getCurrencies().get(1).getValue() +
-                    customer.getSecuritiesAccount().getCurrencies().get(1).getValue();
+            checkAccount += customer.getCheckAccount().getCurrencies().get(1).getValue();
+            saveAccount += customer.getSaveAccount().getCurrencies().get(1).getValue();
+            securitiesAccount += customer.getSecuritiesAccount().getCurrencies().get(1).getValue();
+            sb.append(customer.getTransactionString());
         }
-        return String.valueOf(count);
+        String ans = "";
+        ans+= "checkAccount: <br><br>" + checkAccount +"<br><br>";
+        ans+= "saveAccount: <br><br>" + saveAccount +"<br><br>";
+        ans+= "securitiesAccount: <br><br>" + securitiesAccount +"<br><br>";
+        ans+= "Transactions: <br><br>" + sb +"<br><br>";
+        return ans;
     }
 
 

@@ -63,6 +63,9 @@ public class Customer extends User {
         this.securitiesAccount = securitiesAccount;
     }
 
+
+
+
     public void saveCustomerInfo(){
         Admin admin = new Admin();
         admin.saveNameAndPSWD(this);
@@ -70,6 +73,19 @@ public class Customer extends User {
         admin.saveSaving(this.savingsAccount);
         admin.saveSecurities(this.securitiesAccount);
         transactionArrayList.forEach(admin::saveTransaction);
+    }
+
+
+    public void createSavingAccount(){
+        this.savingsAccount = new SavingsAccount(this.getUserName());
+    }
+
+    public void createCheckAccount(){
+        this.checkingAccount = new CheckingAccount(this.getUserName());
+    }
+
+    public void SecuritiesAccount(){
+        this.securitiesAccount = new SecuritiesAccount(this.getUserName());
     }
 
     @Override
