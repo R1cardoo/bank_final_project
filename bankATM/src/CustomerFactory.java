@@ -22,8 +22,7 @@ public class CustomerFactory {
 
     public static Customer registerCustomer(String userName,String passWord) {
         Customer customer = new Customer(userName, passWord);
-        Admin admin = new Admin();
-        admin.saveNameAndPSWD(customer);
+        Admin.getInstance().saveNameAndPSWD(customer);
         return customer;
     }
 }

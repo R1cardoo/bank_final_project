@@ -3,8 +3,11 @@ import java.awt.*;
 
 public class CustomerHome {
     public static final String COMMAND_CREATE_ACCOUNT = "CreateAccount";
+    public static final String COMMAND_TRANSFER = "Transfer";
     public static final String COMMAND_MAKE_TRANSACTION = "MakeTransaction";
     public static final String COMMAND_SHOW_ACCOUNT = "ShowAccount";
+    public static final String COMMAND_BUY_STOCK = "BuyStock";
+    public static final String COMMAND_SELL_STOCK = "SellStock";
     public static final String COMMAND_SHOW_MARKET = "ShowMarket";
     public static final String COMMAND_VIEW_TRANSACTIONS = "ViewTransactions";
 
@@ -17,9 +20,15 @@ public class CustomerHome {
 
     public static JButton createAccountBtn = new MyButton("Create Account"); // Jcheckbox
 
+    public static JButton transferBtn = new MyButton("Transfer");
+
     public static JButton makeTransactionBtn = new MyButton("Make a Transaction"); // select a account, then action, then amount
 
     public static JButton showAccountBtn = new MyButton("Show Account Info");
+
+    public static JButton buyStockBtn = new MyButton("Buy Stock");
+
+    public static JButton sellStockBtn = new MyButton("Sell Stock");
 
     public static JButton showStockMarketBtn = new MyButton("Show Stock Market Info");
 
@@ -50,6 +59,11 @@ public class CustomerHome {
         createAccountBtn.addActionListener(new CustomerButtonListener());
         panel2.add(createAccountBtn);
 
+        JPanel panel21 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        transferBtn.setActionCommand(COMMAND_TRANSFER);
+        transferBtn.addActionListener(new CustomerButtonListener());
+        panel21.add(transferBtn);
+
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         makeTransactionBtn.setActionCommand(COMMAND_MAKE_TRANSACTION);
         makeTransactionBtn.addActionListener(new CustomerButtonListener());
@@ -59,6 +73,14 @@ public class CustomerHome {
         showAccountBtn.setActionCommand(COMMAND_SHOW_ACCOUNT);
         showAccountBtn.addActionListener(new CustomerButtonListener());
         panel4.add(showAccountBtn);
+
+        JPanel panel41 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buyStockBtn.setActionCommand(COMMAND_BUY_STOCK);
+        buyStockBtn.addActionListener(new CustomerButtonListener());
+        panel41.add(buyStockBtn);
+        sellStockBtn.setActionCommand(COMMAND_SELL_STOCK);
+        sellStockBtn.addActionListener(new CustomerButtonListener());
+        panel41.add(sellStockBtn);
 
         JPanel panel5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         showStockMarketBtn.setActionCommand(COMMAND_SHOW_MARKET);
@@ -73,8 +95,10 @@ public class CustomerHome {
         basePane = Box.createVerticalBox();
         basePane.add(panel1);
         basePane.add(panel2);
+        basePane.add(panel21);
         basePane.add(panel3);
         basePane.add(panel4);
+        basePane.add(panel41);
         basePane.add(panel5);
         basePane.add(panel6);
 

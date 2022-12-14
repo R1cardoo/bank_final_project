@@ -259,9 +259,9 @@ public class Admin {
         for (Map.Entry<FilesName, String> entry : fileMap.entrySet()) {
             //file path for running in intellij IDEA
             //cqin and Carson running path
-             String dir = rootDir1 + File.separator + rootDir2 + File.separator + rootDir3 + File.separator + entry.getKey().getFileName() + fileType;
+            // String dir = rootDir1 + File.separator + rootDir2 + File.separator + rootDir3 + File.separator + entry.getKey().getFileName() + fileType;
             //R Li running path
-            //String dir =rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey().getFileName() + fileType;
+            String dir =rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey().getFileName() + fileType;
             //file path for running in terminal
             // String dir = rootDir + File.separator +rootDir2+ File.separator+ rootDir3+File.separator+ entry.getKey() + fileType;
             File f = new File(dir);

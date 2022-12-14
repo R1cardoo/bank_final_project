@@ -53,7 +53,7 @@ public class Transaction implements Serializable {
                 ", amount=" + amount + "<br>" +
                 ", currency='" + currency + '\'' +
                 ", transactionType='" + transactionType + '\'' +
-                '}';
+                '}' + "<br>";
     }
 
     public String getUserName() {

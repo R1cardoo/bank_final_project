@@ -128,6 +128,15 @@ public class SecuritiesAccount extends Account {
         return false;
     }
 
+    public double getOwnedAmount(String stockName) {
+        for (Stock stock: stockOwned.keySet()) {
+            if (stock.getStockName().equals(stockName)) {
+                return stockOwned.get(stock).get(1);
+            }
+        }
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "SecuritiesAccount:<br>" + this.getCurrencies().toString() + "<br>" + "realizedProfit: " + realizedProfit + "<br>" + "unRealizedProfit: " + unrealizedProfit + "<br>" + stockOwned.toString();

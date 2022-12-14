@@ -17,7 +17,7 @@ public class ViewDailyReportPanel extends JPanel{
         backBtn.addActionListener(new BackButtonListener(ManagerHome.frame, ManagerHome.basePane));
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        label.setText(dailyReport);
+        label.setText("<html><body>" +dailyReport + "<body></html>");
         panel.add(label);
 
         Box vBox = Box.createVerticalBox();
