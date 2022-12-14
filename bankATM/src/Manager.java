@@ -8,11 +8,6 @@ public class Manager extends User {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    /**
-     * interest rate
-     *
-     */
-    static double interestRate = 0.001;
 
     public Manager(String userName, String passWord) {
         super(userName, passWord);
@@ -58,23 +53,6 @@ public class Manager extends User {
         return "null";
     }
 
-    /**
-     * charge fee
-     */
-    public static void chargeFee(Customer customer, double fee,String type) {
-        double originalAmount = customer.getCheckAccount().getCurrencies().get(1).getValue();
-
-        if (originalAmount - fee < 0) {
-            System.err.println("fail to charge fee, not enough balance");
-        } else {
-            Transaction transaction = TransactionFactory.createTransaction(customer, fee, TimeHelper.getInstance().getTime(), "fee");
-            customer.addTransaction(transaction);
-            customer.getCheckAccount().getCurrencies().get(1).setValue(originalAmount - fee);
-            Admin.getInstance().updateChecking(customer.getCheckAccount());
-        }
-
-    }
-
     public static void newDay(){
         Admin admin = Admin.getInstance();
         for (Customer customer : admin.loadAllCustomers()) {
@@ -83,6 +61,7 @@ public class Manager extends User {
             //loan charge interest
             chargeInterest(customer);
         }
+        TimeHelper.getInstance().increase();
     }
 
     /**

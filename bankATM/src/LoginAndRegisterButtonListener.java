@@ -41,10 +41,9 @@ public class LoginAndRegisterButtonListener implements ActionListener{
         } else if (Register.COMMAND_REGISTER.equals(command)) { // press register button
             System.out.println("Register Button pressed");
             if(Arrays.equals(Register.conpassword.getPassword(), Login.password.getPassword())) {
-                // TODO CustomerFactory.createCustomer(Login.username.getText(), Arrays.toString(Login.password.getPassword()));
+                CustomerFactory.registerCustomer(Login.username.getText(), Arrays.toString(Login.password.getPassword()));
                 PWHelper.registerSuccessful();
-            }
-            else {
+            } else {
                 PWHelper.registerFailed();
             }
 

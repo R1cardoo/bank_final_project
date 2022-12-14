@@ -13,7 +13,6 @@ public class TimeHelper {
     public long getTime() {
         return time;
     }
-
     public void increase() {
         time++;
     }

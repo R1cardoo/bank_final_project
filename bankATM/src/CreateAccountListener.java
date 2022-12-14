@@ -9,25 +9,29 @@ public class CreateAccountListener implements ActionListener {
 
         if (command.equals(CreateAccountPanel.COMMAND_CREAT_CHECKING)) {
             if (customer.getCheckAccount() != null) {
-                PWHelper.fail(CustomerHome.frame);
+                MessageDialogHelper.createAccountDuplicate();
             } else {
                 customer.setCheckAccount(new CheckingAccount(customer.getUserName()));
-                PWHelper.success(CustomerHome.frame);
+                MessageDialogHelper.createAccountSuccessful();
             }
         } else if (command.equals(CreateAccountPanel.COMMAND_CREATE_SAVING)) {
             if (customer.getSaveAccount() != null) {
-                PWHelper.fail(CustomerHome.frame);
+                MessageDialogHelper.createAccountDuplicate();
             } else {
                 customer.setSaveAccount(new SavingsAccount(customer.getUserName()));
-                PWHelper.success(CustomerHome.frame);
+                MessageDialogHelper.createAccountSuccessful();
             }
 
         } else if (command.equals(CreateAccountPanel.COMMAND_CREATE_SECURITY)) {
             if (customer.getSecuritiesAccount() != null) {
-                PWHelper.fail(CustomerHome.frame);
+                MessageDialogHelper.createAccountDuplicate();
             } else {
-                customer.setSecuritiesAccount(new SecuritiesAccount(customer.getUserName()));
-                PWHelper.success(CustomerHome.frame);
+                if (customer.getCheckAccount()!= null && customer.getCheckAccount().getCurrencies().get(1).getValue() > 5000) {
+                    customer.setSecuritiesAccount(new SecuritiesAccount(customer.getUserName()));
+                    MessageDialogHelper.createAccountSuccessful();
+                } else {
+                    MessageDialogHelper.securityAccountNotApplicable();
+                }
             }
         }
     }
