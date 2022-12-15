@@ -28,9 +28,15 @@ public class Manager extends User {
         double securitiesAccount = 0;
         StringBuffer sb = new StringBuffer();
         for (Customer customer : customers) {
-            checkAccount += customer.getCheckAccount().getCurrencies().get(1).getValue();
-            saveAccount += customer.getSaveAccount().getCurrencies().get(1).getValue();
-            securitiesAccount += customer.getSecuritiesAccount().getCurrencies().get(1).getValue();
+            if (customer.getCheckAccount() != null){
+                checkAccount += customer.getCheckAccount().getCurrencies().get(1).getValue();
+            }
+            if (customer.getSaveAccount() != null){
+                saveAccount += customer.getSaveAccount().getCurrencies().get(1).getValue();
+            }
+            if (customer.getSecuritiesAccount() != null){
+                securitiesAccount += customer.getSecuritiesAccount().getCurrencies().get(1).getValue();
+            }
             sb.append(customer.getTransactionString());
         }
         String ans = "";
@@ -69,7 +75,10 @@ public class Manager extends User {
      * @return
      */
     public static void payInterest(Customer customer) {
-        customer.getSaveAccount().addInterest();
+        if (customer.getSaveAccount() != null){
+            customer.getSaveAccount().addInterest();
+        }
+
     }
 
     /**
@@ -78,7 +87,10 @@ public class Manager extends User {
      * @return
      */
     public static void chargeInterest(Customer customer) {
-        customer.getCheckAccount().chargeLoanInterest( customer);
+        if (customer.getCheckAccount()!= null){
+            customer.getCheckAccount().chargeLoanInterest( customer);
+        }
+
     }
 
 }

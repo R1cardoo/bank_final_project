@@ -44,7 +44,7 @@ public class CheckingAccount extends Account {
                 TimeHelper.getInstance().getTime(),0, amount, CurrencyType.USD.toString(),"loanInterest");
         Admin.getInstance().getTransactionsList().add(myTransaction);
         Admin.getInstance().saveTransaction(myTransaction);
-        CustomerHome.getCustomer().addTransaction(myTransaction);
+        customer.addTransaction(myTransaction);
 
         loanAmount += amount;
         Admin.getInstance().updateChecking(this);
