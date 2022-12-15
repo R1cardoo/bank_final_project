@@ -32,8 +32,11 @@ public class SellStockPanel extends JPanel {
         // TODO add elements
         panel1.add(comboBox);
         comboBox.removeAllItems();
-        for (Stock stock: CustomerHome.getCustomer().getSecuritiesAccount().getStockOwned().keySet()) {
-            comboBox.addItem(stock.getStockName());
+        if (CustomerHome.getCustomer().getSecuritiesAccount().getStockOwned().size() != 0) {
+            for (Stock stock: CustomerHome.getCustomer().getSecuritiesAccount().getStockOwned().keySet()) {
+                if (stock == null) continue;
+                comboBox.addItem(stock.getStockName());
+            }
         }
         comboBox.setActionCommand(COMMAND_SELECT_COMBOBOX);
         comboBox.addActionListener(new SellStockButtonListener());

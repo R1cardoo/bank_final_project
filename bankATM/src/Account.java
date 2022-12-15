@@ -65,7 +65,7 @@ public class Account {
 
         // TODO now only USD, can implement more later.
         double value = currencies.get(1).getValue();
-        currencies.get(1).setValue(value + amount);''
+        currencies.get(1).setValue(value + amount);
 
         if (this.getClass().equals(CheckingAccount.class)) {
             Admin.getInstance().updateChecking((CheckingAccount) this);
