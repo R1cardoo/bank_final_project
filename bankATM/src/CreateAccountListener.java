@@ -26,7 +26,7 @@ public class CreateAccountListener implements ActionListener {
             if (customer.getSecuritiesAccount() != null) {
                 MessageDialogHelper.createAccountDuplicate();
             } else {
-                if (customer.getCheckAccount()!= null && customer.getCheckAccount().getCurrencies().get(1).getValue() > 5000) {
+                if (customer.getCheckAccount()!= null && customer.getCheckAccount().getCurrencies().get(0).getValue() > 5000) {
                     customer.setSecuritiesAccount(new SecuritiesAccount(customer.getUserName()));
                     MessageDialogHelper.createAccountSuccessful();
                 } else {

@@ -75,10 +75,10 @@ public class Customer extends User {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Customer: " + this.getUserName() + "<br><br>");
-        sb.append("Accounts: <br>")
-                .append(this.checkingAccount.toString()).append("<br>")
-                .append(this.savingsAccount.toString()).append("<br>")
-                .append(this.securitiesAccount.toString()).append("<br><br>");
+        sb.append("Accounts: <br>");
+        if (this.checkingAccount!= null) sb.append(this.checkingAccount).append("<br>");
+        if (this.savingsAccount!= null) sb.append(this.savingsAccount).append("<br>");
+        if (this.securitiesAccount!= null) sb.append(this.securitiesAccount).append("<br>");
         sb.append(", transactionArrayList=<br>").append(transactionArrayList.toString());
         sb.append('}');
         return sb.toString();

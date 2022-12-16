@@ -29,13 +29,13 @@ public class Manager extends User {
         StringBuffer sb = new StringBuffer();
         for (Customer customer : customers) {
             if (customer.getCheckAccount() != null){
-                checkAccount += customer.getCheckAccount().getCurrencies().get(1).getValue();
+                checkAccount += customer.getCheckAccount().getCurrencies().get(0).getValue();
             }
             if (customer.getSaveAccount() != null){
-                saveAccount += customer.getSaveAccount().getCurrencies().get(1).getValue();
+                saveAccount += customer.getSaveAccount().getCurrencies().get(0).getValue();
             }
             if (customer.getSecuritiesAccount() != null){
-                securitiesAccount += customer.getSecuritiesAccount().getCurrencies().get(1).getValue();
+                securitiesAccount += customer.getSecuritiesAccount().getCurrencies().get(0).getValue();
             }
             sb.append(customer.getTransactionString());
         }

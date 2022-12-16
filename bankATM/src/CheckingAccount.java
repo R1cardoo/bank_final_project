@@ -13,7 +13,8 @@ public class CheckingAccount extends Account {
     }
     public CheckingAccount(String username) {
         super(username, TypeOfAccount.Checking);
-        this.loanAmount = loanAmount;
+        this.loanAmount = 0;
+        Admin.getInstance().saveChecking(this);
     }
 
     public double getLoanAmount() {
@@ -32,8 +33,8 @@ public class CheckingAccount extends Account {
         CustomerHome.getCustomer().addTransaction(myTransaction);
 
         loanAmount +=amount;
-        double value = this.getCurrencies().get(1).getValue();
-        this.getCurrencies().get(1).setValue(value + amount);
+        double value = this.getCurrencies().get(0).getValue();
+        this.getCurrencies().get(0).setValue(value + amount);
 
         Admin.getInstance().updateChecking((CheckingAccount) this);
     }

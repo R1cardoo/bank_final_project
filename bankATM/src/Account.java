@@ -64,8 +64,8 @@ public class Account {
         CustomerHome.getCustomer().addTransaction(myTransaction);
 
         // TODO now only USD, can implement more later.
-        double value = currencies.get(1).getValue();
-        currencies.get(1).setValue(value + amount);
+        double value = currencies.get(0).getValue();
+        currencies.get(0).setValue(value + amount);
 
         if (this.getClass().equals(CheckingAccount.class)) {
             Admin.getInstance().updateChecking((CheckingAccount) this);
@@ -78,7 +78,7 @@ public class Account {
 
 
     public boolean withdrawMoney(double amount) {
-        double curAmount = currencies.get(1).getValue();
+        double curAmount = currencies.get(0).getValue();
         if (curAmount < amount) {
             System.out.println("Not enough balance"); //show not enough balance in GUI
             return false;
@@ -89,7 +89,7 @@ public class Account {
             Admin.getInstance().saveTransaction(myTransaction);
             CustomerHome.getCustomer().addTransaction(myTransaction);
 
-            currencies.get(1).setValue(curAmount - amount);
+            currencies.get(0).setValue(curAmount - amount);
 
             if (this.getClass().equals(CheckingAccount.class)) {
                 Admin.getInstance().updateChecking((CheckingAccount) this);
@@ -103,7 +103,7 @@ public class Account {
     }
 
     public void setUSD(double amount) {
-        currencies.get(1).setValue(amount);
+        currencies.get(0).setValue(amount);
     }
 
 }

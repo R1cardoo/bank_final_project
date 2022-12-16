@@ -24,6 +24,7 @@ public class SecuritiesAccount extends Account {
         this.realizedProfit = 0;
         this.unrealizedProfit = 0;
         this.stockOwned = new HashMap<>();
+        Admin.getInstance().saveSecurities(this);
     }
 
 
@@ -60,7 +61,7 @@ public class SecuritiesAccount extends Account {
             if (stock.getStockName().equals(stockName)) {
                 double unitPrice = stock.getStockPrice();
                 double totalPrice = unitPrice * amount;
-                double originalMoney = getCurrencies().get(1).getValue();
+                double originalMoney = getCurrencies().get(0).getValue();
                 if (totalPrice < originalMoney) {
                     System.out.println("No enough money to buy!");
                     return false;
@@ -72,7 +73,7 @@ public class SecuritiesAccount extends Account {
                     Admin.getInstance().saveTransaction(myTransaction);
                     CustomerHome.getCustomer().addTransaction(myTransaction);
 
-                    getCurrencies().get(1).setValue(originalMoney - totalPrice);
+                    getCurrencies().get(0).setValue(originalMoney - totalPrice);
                     // add stock to stockOwned
                     ArrayList<Double> mylist = new ArrayList<Double>();
                     mylist.add(unitPrice);
@@ -92,9 +93,9 @@ public class SecuritiesAccount extends Account {
             if (stock.getStockName().equals(stockName)) {
                 double unitPrice = stock.getStockPrice();
                 double totalPrice = unitPrice * amount;
-                double originalMoney = getCurrencies().get(1).getValue();
+                double originalMoney = getCurrencies().get(0).getValue();
                 if (amount > 0 ) {
-                    amount = Math.min(amount, stockOwned.get(stock).get(1));
+                    amount = Math.min(amount, stockOwned.get(stock).get(0));
 
                     // add money in securitiesAccount
                     Transaction myTransaction = new Transaction(CustomerHome.getCustomer().getUserName(), TypeOfAccount.Checking.getTypeOfAccount(),
@@ -103,7 +104,7 @@ public class SecuritiesAccount extends Account {
                     Admin.getInstance().saveTransaction(myTransaction);
                     CustomerHome.getCustomer().addTransaction(myTransaction);
 
-                    getCurrencies().get(1).setValue(originalMoney + totalPrice);
+                    getCurrencies().get(0).setValue(originalMoney + totalPrice);
 
                     // deduct amount in stockOwned;
                     double profit = totalPrice - amount * stockOwned.get(stock).get(0);

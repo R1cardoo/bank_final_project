@@ -12,11 +12,12 @@ public class SavingsAccount extends Account {
 
     public SavingsAccount(String username) {
         super(username, TypeOfAccount.Savings);
+        Admin.getInstance().saveSaving(this);
     }
 
     public void addInterest() { //interest if the balance is high in the savings account
-        if (this.getCurrencies().get(1).getValue() > Constants.getMinimumSavingsAccountBalanceForSecurities()) {
-            double balanceUSD = this.getCurrencies().get(1).getValue() + (this.getCurrencies().get(1).getValue() * Constants.getSavingsAccountInterestPercentage());
+        if (this.getCurrencies().get(0).getValue() > Constants.getMinimumSavingsAccountBalanceForSecurities()) {
+            double balanceUSD = this.getCurrencies().get(0).getValue() + (this.getCurrencies().get(0).getValue() * Constants.getSavingsAccountInterestPercentage());
             this.setUSD(balanceUSD);
             // directly update the
             Admin.getInstance().updateSaving(this);

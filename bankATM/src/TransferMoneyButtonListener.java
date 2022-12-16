@@ -25,11 +25,11 @@ public class TransferMoneyButtonListener implements ActionListener {
 
     public double getAmountFromAccount(String FromAccount) {
         if (FromAccount.equals(TransferMoneyPanel.CHECKING)) {
-            return CustomerHome.getCustomer().getCheckAccount().getCurrencies().get(1).getValue();
+            return CustomerHome.getCustomer().getCheckAccount().getCurrencies().get(0).getValue();
         } else if (FromAccount.equals(TransferMoneyPanel.SAVING)) {
-            return CustomerHome.getCustomer().getSaveAccount().getCurrencies().get(1).getValue();
+            return CustomerHome.getCustomer().getSaveAccount().getCurrencies().get(0).getValue();
         } else if (FromAccount.equals(TransferMoneyPanel.SECURITY)) {
-            return CustomerHome.getCustomer().getSecuritiesAccount().getCurrencies().get(1).getValue();
+            return CustomerHome.getCustomer().getSecuritiesAccount().getCurrencies().get(0).getValue();
         }
         return 0;
 
